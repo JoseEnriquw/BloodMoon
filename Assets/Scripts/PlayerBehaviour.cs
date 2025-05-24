@@ -2,82 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerBehaviour : MonoBehaviour
 {
-    BulletsManager bulletsManager;   
-    PotionManager potionManager;
-    RuinManager ruinManager;
-    [SerializeField]PlayerData playerData;
-
-    private BulletsManager nearbyBullet;
-    private PotionManager nearbyPotion;
-    private RuinManager nearbyRuin;
+    [SerializeField] private PlayerData playerData;
+    private readonly List<ICollectible> nearbyCollectibles = new List<ICollectible>();
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            TryCollect();
+            TryCollectAll();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        if (other.TryGetComponent<ICollectible>(out var collectible))
         {
-            nearbyBullet = other.GetComponent<BulletsManager>();
-        }
-        else if (other.CompareTag("Potion"))
-        {
-            nearbyPotion = other.GetComponent<PotionManager>();
-        }
-        else if (other.CompareTag("Ruin"))
-        {
-            nearbyRuin = other.GetComponent<RuinManager>();
+            nearbyCollectibles.Add(collectible);
+
+            // Si es daño, aplicar instantáneamente
+            if (collectible is DamageManager)
+            {
+                collectible.Collect(playerData);
+                nearbyCollectibles.Remove(collectible);
+                // Opcional: Destroy(((MonoBehaviour)collectible).gameObject);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        if (other.TryGetComponent<ICollectible>(out var collectible))
         {
-            if (nearbyBullet == other.GetComponent<BulletsManager>())
-                nearbyBullet = null;
-        }
-        else if (other.CompareTag("Potion"))
-        {
-            if (nearbyPotion == other.GetComponent<PotionManager>())
-                nearbyPotion = null;
-        }
-        else if (other.CompareTag("Ruin"))
-        {
-            if (nearbyRuin == other.GetComponent<RuinManager>())
-                nearbyRuin = null;
+            nearbyCollectibles.Remove(collectible);
         }
     }
 
-    private void TryCollect()
+    private void TryCollectAll()
     {
-        if (nearbyBullet != null)
+        foreach (var collectible in new List<ICollectible>(nearbyCollectibles))
         {
-            playerData.Bullets += nearbyBullet.value;
-            Destroy(nearbyBullet.gameObject);
-            nearbyBullet = null;
-        }
-
-        if (nearbyPotion != null)
-        {
-            playerData.Health += nearbyPotion.value;
-            Destroy(nearbyPotion.gameObject);
-            nearbyPotion = null;
-        }
-
-        if (nearbyRuin != null)
-        {
-            playerData.Runes += nearbyRuin.value;
-            Destroy(nearbyRuin.gameObject);
-            nearbyRuin = null;
+            collectible.Collect(playerData);
+            Destroy(((MonoBehaviour)collectible).gameObject);
+            nearbyCollectibles.Remove(collectible);
         }
     }
     
+
 }
