@@ -62,10 +62,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Scriptables\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICollectible.cs" />
+    <Compile Include="Assets\Scripts\GameInfo.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\CollectibleBase.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
+    <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Managers\RuinManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\BulletsManager.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />

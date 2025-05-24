@@ -23,12 +23,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             nearbyCollectibles.Add(collectible);
 
-            // Si es daño, aplicar instantáneamente
+            
             if (collectible is DamageManager)
             {
                 collectible.Collect(playerData);
                 nearbyCollectibles.Remove(collectible);
-                // Opcional: Destroy(((MonoBehaviour)collectible).gameObject);
+                //  Destroy(((MonoBehaviour)collectible).gameObject);
             }
         }
     }
