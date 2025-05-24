@@ -1,28 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    static UIManager current;
+    public static UIManager Instance;
 
+    [Header("HUD")]
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI bulletsText;
+    [SerializeField] private TextMeshProUGUI ruinsText;
 
     private void Awake()
     {
-        if (current != null && current != this)
+        if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
             return;
         }
-        current = this;
-        DontDestroyOnLoad(gameObject);
+
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
-   
-   
-    public static UIManager GetUIManager() => current;
-
-   
+    public void UpdateHUD(float health, int bullets, int ruins)
+    {
+        if (healthText != null) healthText.text = health.ToString();
+        if (bulletsText != null) bulletsText.text = bullets.ToString();
+        if (ruinsText != null) ruinsText.text = ruins.ToString();
+    }
 }

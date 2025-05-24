@@ -6,16 +6,18 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
-    [SerializeField] TextMeshProUGUI health;
-    [SerializeField] TextMeshProUGUI bullets;
-    [SerializeField] TextMeshProUGUI ruins;
-    private bool ExecutedCoroutine;
+    //[SerializeField] TextMeshProUGUI health;
+    //[SerializeField] TextMeshProUGUI bullets;
+    //[SerializeField] TextMeshProUGUI ruins;
+   // private bool ExecutedCoroutine;
     [SerializeField] PlayerData playerData;
     GameInfo gameInfo;
+    private string savePath;
 
     float _healthTemp= 0f;
     int _bulletTemp= 0;
@@ -23,52 +25,49 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if(gameManager == null)
+       
+        savePath = Application.persistentDataPath + "/GameInfo.dat";
+        if (gameManager != null && gameManager != this)
         {
-            DontDestroyOnLoad(gameObject);
-            gameManager = this;
+            Destroy(this.gameObject);
+            return;
         }
-        else if(gameManager != this)
-        {
-            Destroy(gameManager);   
-        }
+
+        gameManager = this;
+        DontDestroyOnLoad(this.gameObject);
+
     }
     void Start()
     {
-        UpdateUi();
-
+        // UpdateUi();
+        SceneManager.sceneLoaded += OnSceneLoaded;
         _healthTemp = playerData.Health;
         _bulletTemp = playerData.Bullets;
         _ruinsTemp = playerData.Runes;
-
+        
         LoadData();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_healthTemp != playerData.Health)            
+        if (_healthTemp != playerData.Health ||
+            _bulletTemp != playerData.Bullets ||
+            _ruinsTemp != playerData.Runes)
         {
-            UpdateUi();
+            _healthTemp = playerData.Health;
+            _bulletTemp = playerData.Bullets;
+            _ruinsTemp = playerData.Runes;
+
+            UIManager.Instance?.UpdateHUD(_healthTemp, _bulletTemp, _ruinsTemp);
         }
-        if (_bulletTemp != playerData.Bullets)
-        {
-            UpdateUi();
-        }
-        if (_ruinsTemp != playerData.Runes)
-        {
-            UpdateUi();
-        }
+       
     }
 
-    private void UpdateUi()
-    {
-        health.text = playerData.Health.ToString();
-        bullets.text = playerData.Bullets.ToString();
-        ruins.text = playerData.Runes.ToString();
-    }
+   
 
-    public void SaveData()
+    public void SaveData(string sceneName = null)
     {
         string path = Application.persistentDataPath + "/GameInfo.dat";
 
@@ -82,7 +81,8 @@ public class GameManager : MonoBehaviour
                 {
                     Health = playerData.Health,
                     Bullets = playerData.Bullets,
-                    Runes = playerData.Runes
+                    Runes = playerData.Runes,
+                    LastScene = sceneName ?? SceneManager.GetActiveScene().name
                 };
 
                 bf.Serialize(fileStream, gameInfo);
@@ -114,10 +114,14 @@ public class GameManager : MonoBehaviour
                     BinaryFormatter bf = new BinaryFormatter();
                     using (FileStream fileStream = File.Open(path, FileMode.Open))
                     {
-                        GameInfo gameInfo = (GameInfo)bf.Deserialize(fileStream);
+                        gameInfo = (GameInfo)bf.Deserialize(fileStream);
                         playerData.Health = gameInfo.Health;
                         playerData.Bullets = gameInfo.Bullets;
                         playerData.Runes = gameInfo.Runes;
+                    }
+                    if (!string.IsNullOrEmpty(gameInfo.LastScene) && gameInfo.LastScene != SceneManager.GetActiveScene().name)
+                    {
+                        SceneManager.LoadScene(gameInfo.LastScene);
                     }
                 }
                 catch (System.Exception e)
@@ -141,38 +145,24 @@ public class GameManager : MonoBehaviour
         SaveData();
     }
 
-    public void NextScene()
+   
+    public void ChangeScene(string sceneName)
     {
-        var sceneNumber = SceneManager.GetActiveScene().buildIndex;
-        var nextScene = sceneNumber + 1;
-        if (sceneNumber != 4)
-        {
-            if (ExecutedCoroutine) return; // Evita llamadas repetidas
-            ExecutedCoroutine = true;
-            //UIManager.GetUIManager().ChangeLoadingBackGround(sceneNumber);
-
-            // Suscribirse al evento una sola vez
-            SceneManager.sceneLoaded += (scene, loadMode) => { UIManager.GetUIManager(); };
-
-            // Inicia la carga de la escena con un delay
-            StartCoroutine(EjecutarConDelay(5f, () =>
-            {
-                SceneManager.LoadScene(nextScene);
-            }));
-        }
-        else
-        {
-           // UIManager.GetUIManager().HideTaskPanel();
-            SceneManager.LoadScene(nextScene);
-        }
+        SaveData(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
-    IEnumerator EjecutarConDelay(float seconds, Action action)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        yield return new WaitForSeconds(seconds);
+        StartCoroutine(UpdateHUDNextFrame());
+        // UIManager.Instance?.UpdateHUD(playerData.Health, playerData.Bullets, playerData.Runes);
+    }
+    private IEnumerator UpdateHUDNextFrame()
+    {
+        while (UIManager.Instance == null)
+        {
+            yield return null; // espera 1 frame
+        }
 
-        // Código que se ejecuta después del delay
-        Debug.Log($"Han pasado {seconds} segundos");
-        action?.Invoke();
-        ExecutedCoroutine = false;
+        UIManager.Instance?.UpdateHUD(playerData.Health, playerData.Bullets, playerData.Runes);
     }
 }

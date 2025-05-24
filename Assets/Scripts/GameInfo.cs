@@ -11,5 +11,6 @@ public class GameInfo
     public float Health;
     public int Bullets;
     public int Runes;
-  //  public Vector3 LastPosition;
+    public string LastScene;
+    //  public Vector3 LastPosition;
 }

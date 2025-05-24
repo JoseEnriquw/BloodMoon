@@ -290,7 +290,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0de330195e45e14496c49ed7df29f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 
+  sceneToLoad: Nivel1
 --- !u!1 &388291978
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +698,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 376566f8e777dc845ab2522c84cf4a7b, type: 2}
+  - {fileID: 2100000, guid: 3b9e3ea681bce7d40a701b46a13dbb3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2348,7 +2348,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2092534468}
   - component: {fileID: 2092534469}
-  - component: {fileID: 2092534470}
   m_Layer: 0
   m_Name: NextLvl
   m_TagString: Untagged
@@ -2386,25 +2385,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 6.11, y: 9.16, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2092534470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092534467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0de330195e45e14496c49ed7df29f6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: Nivel2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
