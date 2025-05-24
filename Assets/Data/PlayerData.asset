@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be94a6daaf3f91458d26f7fcfc3228b, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  Health: 95
+  Health: 10
   Bullets: 0
   Runes: 0
   LastPosition: {x: 0, y: 0, z: 0}
