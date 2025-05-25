@@ -15,6 +15,18 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TryCollectAll();
         }
+        if (InteractionUIManager.Instance != null)
+        {
+            if (nearbyCollectibles.Count > 0)
+            {
+                InteractionUIManager.Instance.ShowInteraction("Presiona E para recoger");
+            }
+            else
+            {
+                InteractionUIManager.Instance.HideInteraction();
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
