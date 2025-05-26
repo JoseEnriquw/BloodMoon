@@ -8,14 +8,15 @@ TagManager:
   - Potion
   - Ruin
   - Damage
+  - EnemyLvl1
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - groundLayer
   - Water
   - UI
-  - 
+  - playerLayer
   - 
   - 
   - 
