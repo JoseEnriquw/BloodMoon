@@ -60,27 +60,29 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.18f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DefeatScreenController.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\BulletsManager.cs" />
+    <Compile Include="Assets\Scripts\Surface.cs" />
+    <Compile Include="Assets\Scripts\Managers\InteractionUIManager.cs" />
+    <Compile Include="Assets\Scripts\ScenePortal.cs" />
+    <Compile Include="Assets\Scripts\Managers\PotionManager.cs" />
     <Compile Include="Assets\Scripts\Scriptables\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICollectible.cs" />
     <Compile Include="Assets\Scripts\FloatingItem.cs" />
     <Compile Include="Assets\Scripts\EnemiesController.cs" />
     <Compile Include="Assets\Scripts\GameInfo.cs" />
     <Compile Include="Assets\Scripts\InitLoader.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
-    <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\3D\Brian\Scripts\BrianAnimatorControllerState.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\Managers\RuinManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\BulletsManager.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Surface.cs" />
     <Compile Include="Assets\navmeshsurface.cs" />
-    <Compile Include="Assets\Scripts\Managers\InteractionUIManager.cs" />
-    <Compile Include="Assets\Scripts\ScenePortal.cs" />
-    <Compile Include="Assets\Scripts\Managers\PotionManager.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerSounds.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1081,6 +1083,14 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
