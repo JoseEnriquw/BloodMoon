@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Surface.cs" />
     <Compile Include="Assets\Scripts\Managers\InteractionUIManager.cs" />
     <Compile Include="Assets\Scripts\ScenePortal.cs" />
+    <Compile Include="Assets\Scripts\VictoryScreenController.cs" />
     <Compile Include="Assets\Scripts\Managers\PotionManager.cs" />
     <Compile Include="Assets\Scripts\Scriptables\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICollectible.cs" />
@@ -941,10 +942,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -959,6 +956,10 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
