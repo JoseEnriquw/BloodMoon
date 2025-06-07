@@ -9,7 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{23DF22B6-65E4-F556-2F9F-51B5BB60C187}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -1153,10 +1154,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{E7E5C33E-07BF-0AD5-AED3-FEB007811FF2}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.StarterAssets.Editor.csproj">
       <Project>{A00C4347-E6A8-A76B-1F68-698F7B28D7B2}</Project>
       <Name>Unity.StarterAssets.Editor</Name>
