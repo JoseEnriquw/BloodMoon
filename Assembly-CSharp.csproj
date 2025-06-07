@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\BulletsManager.cs" />
+    <Compile Include="Assets\Scripts\FarmGenerator.cs" />
     <Compile Include="Assets\Scripts\Surface.cs" />
     <Compile Include="Assets\Scripts\Managers\InteractionUIManager.cs" />
     <Compile Include="Assets\Scripts\ScenePortal.cs" />
