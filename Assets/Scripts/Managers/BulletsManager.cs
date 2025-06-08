@@ -11,6 +11,17 @@ public class BulletsManager : MonoBehaviour, ICollectible
     {
         playerData.Bullets += _value;
     }
-    //public int value { get { return _value; } set { _value = value; } }
-    
+
+    //BALA HACE DAÒO AL enemigo
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            var healthcomponent = other.GetComponent<EnemyHealth>();
+            if (healthcomponent != null)
+            {
+                healthcomponent.ReciveDamage(_value);
+            }
+        }
+    }
 }

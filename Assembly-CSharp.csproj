@@ -71,27 +71,34 @@
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
+    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\BulletsManager.cs" />
+    <Compile Include="Assets\Scripts\FarmGenerator.cs" />
     <Compile Include="Assets\Scripts\Surface.cs" />
     <Compile Include="Assets\Scripts\Managers\InteractionUIManager.cs" />
     <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\ScenePortal.cs" />
+    <Compile Include="Assets\Scripts\VictoryScreenController.cs" />
     <Compile Include="Assets\Scripts\Managers\PotionManager.cs" />
     <Compile Include="Assets\Models\Character\Scripts\BrianAnimatorControllerState.cs" />
     <Compile Include="Assets\Scripts\Scriptables\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICollectible.cs" />
+    <Compile Include="Assets\StarterAssets\Mobile\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
     <Compile Include="Assets\Scripts\FloatingItem.cs" />
-    <Compile Include="Assets\Scripts\EnemiesController.cs" />
+    <Compile Include="Assets\Scripts\ZombieSpawner.cs" />
     <Compile Include="Assets\Scripts\GameInfo.cs" />
+    <Compile Include="Assets\Scripts\Character\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\InitLoader.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\Character\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\Managers\RuinManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
+    <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
     <Compile Include="Assets\navmeshsurface.cs" />
+    <Compile Include="Assets\Scripts\Character\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerSounds.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -101,16 +108,19 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Models\Military\StarterAssets\license.txt" />
+    <None Include="Assets\ZombiePck\Zombie Cartoon\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\Models\Military\StarterAssets\license.txt" />
+    <None Include="Assets\StarterAssets\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Polygonal Particles\Assets\Shaders\GradientBackgroundShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -947,10 +957,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Animation.Rigging">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -973,10 +979,6 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">

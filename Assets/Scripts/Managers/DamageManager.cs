@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class DamageManager : MonoBehaviour, ICollectible
 {
+    //ESO SIRVE PARA UNA ZONA QUE HAGA DAÒO (PISO, PICOS ETC)
     [SerializeField] float _value;
     public void Collect(PlayerData playerData)
     {
         playerData.Health -= _value;
     }
-    // public float value { get { return _value; } set { _value = value; } }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            var healthcomponent = other.GetComponent<PlayerHealth>();
+            if (healthcomponent != null)
+            {
+                healthcomponent.ReciveDamage((int)_value);
+            }
+        }
+    }
 }
