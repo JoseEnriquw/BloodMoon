@@ -60,6 +60,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.18f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\HealthSystem.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemiesController2.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemiesController.cs" />
+    <Compile Include="Assets\Scripts\DefeatScreenController.cs" />
+    <Compile Include="Assets\Scripts\Mover.cs" />
+    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
