@@ -3,40 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private PlayerData playerData;
-    private HealthSystem healthSystem;
+    [SerializeField] private PlayerData playerData;  
     private bool isDead = false;
+   // Animator anim;
     private void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
+      
     }
 
     private void Start()
     {
         playerData.MaxHealth = 100;
+       // anim= GetComponent<Animator>();       
+    }
 
-        // Setear salud inicial desde el PlayerData
-        healthSystem.SetMaxHealth((int)playerData.MaxHealth);
-        healthSystem.SetCurrentHealth((int)playerData.Health);
-
+   
+    public void ReciveHealth(int health)
+    {
+        SetHealth(playerData.Health + health);         
+    }   
+    public void ReciveDamage(int damage)
+    {
         
-        healthSystem.OnHealthChanged += UpdatePlayerData;
-        healthSystem.OnDeath += PlayerDeath;
-    }
-
-    private void UpdatePlayerData(int currentHealth)
-    {
-        // Limitar dentro de rango válido
-        playerData.Health = Mathf.Clamp(currentHealth, 0, playerData.MaxHealth);
-    }
-
-    private void PlayerDeath()
-    {
-        if (!isDead)
+        SetHealth(playerData.Health - damage);
+        if (playerData.Health <=0 &&!isDead)
         {
             isDead = true;
-            Debug.Log("Player is dead");
-            // Aquí podés poner animación, reinicio de nivel, etc.
+           // anim.SetBool("isDeath", true);
+            //pasar a pantalla de derrota
+            return;
         }
     }
+    private void SetHealth(float value)
+    {
+        playerData.Health = Mathf.Clamp(value, 0, playerData.MaxHealth);
+    }
+
 }

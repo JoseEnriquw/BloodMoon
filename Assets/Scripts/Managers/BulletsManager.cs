@@ -11,16 +11,16 @@ public class BulletsManager : MonoBehaviour, ICollectible
     {
         playerData.Bullets += _value;
     }
-   
-    //BALA HACE DAÒO AL PLAYER
+
+    //BALA HACE DAÒO AL enemigo
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            var healthcomponent=other.GetComponent<HealthSystem>();
-            if(healthcomponent != null)
+            var healthcomponent = other.GetComponent<EnemyHealth>();
+            if (healthcomponent != null)
             {
-                healthcomponent.TakeDamage(_value);
+                healthcomponent.ReciveDamage(_value);
             }
         }
     }

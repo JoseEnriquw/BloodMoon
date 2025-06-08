@@ -14,10 +14,10 @@ public class DamageManager : MonoBehaviour, ICollectible
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            var healthcomponent = other.GetComponent<HealthSystem>();
+            var healthcomponent = other.GetComponent<PlayerHealth>();
             if (healthcomponent != null)
             {
-                healthcomponent.TakeDamage((int)_value);
+                healthcomponent.ReciveDamage((int)_value);
             }
         }
     }

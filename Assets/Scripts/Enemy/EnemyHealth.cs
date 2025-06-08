@@ -1,23 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public class EnemyHealth : MonoBehaviour
 {
-    private HealthSystem healthSystem;
-
+    
+    [SerializeField] int maxHealth = 100;
+    [SerializeField] int currentHealth;
+    Animator animator;
+    public bool isDead = false;
+    [SerializeField] private GameObject deathParticlesPrefab;
+    [SerializeField] private AudioClip deathSound;
+    private AudioSource audioSource;
     private void Awake()
-    {
-        healthSystem = GetComponent<HealthSystem>();
+    {      
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
+    {       
+        currentHealth = maxHealth;
+    }
+   
+    public void ReciveHealth(int health)
     {
-        healthSystem.OnDeath += EnemyDeath;
+        SetHealth(currentHealth + health);
+    }
+    public void ReciveDamage(int damage)
+    {
+        SetHealth(currentHealth - damage);        
+        if (currentHealth <= 0 && !isDead)
+        {
+            isDead = true;
+            animator.SetBool("IsDead ", true);
+            audioSource.PlayOneShot(deathSound);
+            var nav = GetComponent<NavMeshAgent>();
+            if (nav != null)
+            {
+                nav.isStopped = true;
+                nav.enabled = false;
+            }
+            StartCoroutine(DestroyAfterDeath());          
+            return;
+        }
+    }
+    private void SetHealth(int value)
+    {
+        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+    }  
+
+    private IEnumerator DestroyAfterDeath()
+    {
+        yield return new WaitForSeconds(3f);
+        if (deathParticlesPrefab != null)
+        {
+            Instantiate(deathParticlesPrefab, transform.position, Quaternion.identity);
+        }      
+       
+        Destroy(gameObject);
     }
 
-    private void EnemyDeath()
-    {
-        Debug.Log("Enemy muerto");
-       // Destroy(gameObject); // o animación de muerte
-    }
+
 }

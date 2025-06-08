@@ -1,191 +1,222 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyState { Patrolling, Chasing, Attacking, Returning }
+
+[RequireComponent(typeof(NavMeshAgent), typeof(SphereCollider))]
 public class EnemiesController : MonoBehaviour
 {
+   
     [Header("Components")]
     public NavMeshAgent agent;
-    public GameObject projectile;
+    private Animator animator;
+    private AudioSource audioSrc;
+    private EnemyHealth health;
+    private Transform player;
 
-    [Header("Layers")]
-    public LayerMask groundLayer;
-    public LayerMask playerLayer;
+   
+    private Transform[] patrolPoints;
+    private int patrolIndex;
+    private Vector3 patrolCenter;
+    private float patrolRadius = 10f;
 
-    [Header("Patrol Settings")]
-    public float patrolPointRange = 10f;
-    private Vector3 walkPoint;
-    private bool walkPointSet = false;  
-    public float walkPointRange;
+    
+    [Header("Combat Settings")]
+    [SerializeField] private float detectionRange = 10f;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float timeBetweenAttks = 1f;
+    private bool alreadyAttacked;
 
-    [Header("Detection/Trigger")]
-    public float triggerRadius = 8f;  
-    private bool playerInTrigger = false;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioClip walkClip;
+    [SerializeField] private AudioClip hitClip;
+    [SerializeField] private float walkClipCooldown = .7f;
+    private float walkTimer;
 
-    [Header("Attack Settings")]
-    public float attackRayDistance = 4f;    
-    public float timeBetweenAttacks = 1f;
-    private bool alreadyAttacked = false;
+ 
+    private EnemyState state = EnemyState.Patrolling;
 
-    private Transform playerTransform;
-
-    private void Awake()
+   
+    #region Inicialización 
+    public void AssignPatrolData(Vector3 center, float radius, Transform[] points)
     {
+        patrolCenter = center;
+        patrolRadius = radius;
+        patrolPoints = points;
+
         
+        SphereCollider col = GetComponent<SphereCollider>();
+        col.isTrigger = true;
+        col.radius = radius;
+        col.center = transform.InverseTransformPoint(center);
+    }
+
+    void Awake()
+    {
         agent = GetComponent<NavMeshAgent>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        audioSrc = GetComponent<AudioSource>();
+        health = GetComponent<EnemyHealth>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
-        var sc = GetComponent<SphereCollider>();
-        if (sc == null)
+    void Start()
+    {
+        if (patrolPoints != null && patrolPoints.Length > 0 && agent.isOnNavMesh)
+            agent.SetDestination(patrolPoints[0].position);
+    }
+    #endregion
+
+    #region Update
+    void Update()
+    {
+        if (health.isDead) return;
+
+        switch (state)
         {
-            sc = gameObject.AddComponent<SphereCollider>();
-            sc.isTrigger = true;
-            sc.radius = triggerRadius;
+            case EnemyState.Patrolling: HandlePatrol(); break;
+            case EnemyState.Chasing: animator.SetFloat("XSpeed", 3); break;
+            case EnemyState.Returning:
+                animator.SetFloat("XSpeed", 1);
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + .1f)
+                    ToPatrol();
+                break;
+                
+        }
+
+       
+        walkTimer -= Time.deltaTime;
+    }
+    #endregion
+
+    #region Patrullaje
+    void HandlePatrol()
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + .1f)
+        {
+            patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
+            if (agent.isOnNavMesh)
+                agent.SetDestination(patrolPoints[patrolIndex].position);
+        }
+
+        animator.SetFloat("XSpeed", 1);
+        if (!audioSrc.isPlaying)
+        {
+            audioSrc.PlayOneShot(walkClip);
         }
     }
+    #endregion
 
-    private void Update()
+    #region Triggers
+    void OnTriggerStay(Collider other)
     {
-        if (!playerInTrigger && !walkPointSet)
-            SearchWalkPoint();
+        if (health.isDead || !other.CompareTag("Player")) return;
+        float distToCenter = Vector3.Distance(other.transform.position, patrolCenter);
+        if (distToCenter > patrolRadius)
+        {
+            OnTriggerExit(other);          
+            return;
+        }
+        float dist = Vector3.Distance(transform.position, player.position);
 
-        if (!playerInTrigger)
-            Patroling();
-       
-    }
-    private void Patroling()
-    {
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-    }
-    private void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, groundLayer))
-            walkPointSet = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        playerInTrigger = true;
-        agent.isStopped = false;
-        agent.SetDestination(other.transform.position);
-
-       
-        Vector3 lookDir = (other.transform.position - transform.position).normalized;
-        if (lookDir != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                 Quaternion.LookRotation(lookDir),
-                                                 Time.deltaTime * 5f);
-
-        
-        if (HasLineOfSight(other.transform))
+        if (state != EnemyState.Attacking && dist > attackRange)
+        {
+            state = EnemyState.Chasing;
+            agent.isStopped = false;
+            if (agent.isOnNavMesh)
+                agent.SetDestination(player.position);           
+        }
+        else if (dist <= attackRange && !alreadyAttacked)
+        {
+            state = EnemyState.Attacking;
+            agent.isStopped = true;
+            FaceTarget(player.position);
             AttackPlayer();
-    }
-
-    private void OnTriggerExit(Collider other)
+        }
+    }  
+    void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
-        playerInTrigger = false;
-        agent.isStopped = true;
-        alreadyAttacked = false;  
+        CancelAttack();
+        state = EnemyState.Returning;
+        agent.isStopped = false;
+        if (agent.isOnNavMesh)
+            agent.SetDestination(patrolCenter);
     }
+    #endregion
 
-    private bool HasLineOfSight(Transform target)
+    #region Ataque
+    void AttackPlayer()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.5f;
-        Vector3 dir = (target.position - origin).normalized;
-        float dist = Vector3.Distance(origin, target.position);
-
-        if (dist > attackRayDistance) return false;
-
-        if (Physics.Raycast(origin, dir, out RaycastHit hit, attackRayDistance, playerLayer | groundLayer))
-        {
-            Debug.DrawRay(origin, dir * attackRayDistance, Color.red);
-            return hit.transform == target;
-        }
-        return false;
-    }
-
-    private void AttackPlayer()
-    {
-        if (alreadyAttacked) return;
-
-        
-        agent.isStopped = true;
-
-       
-        Vector3 spawnPos = transform.position + transform.forward * 1.2f + Vector3.up * 0.5f;
-        var rb = Instantiate(projectile, spawnPos, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-        rb.AddForce(Vector3.up * 8f, ForceMode.Impulse);
-
+        animator.SetTrigger("IsAttacking");
+        if (hitClip) audioSrc.PlayOneShot(hitClip);
+        agent.isStopped = true;       
+        Invoke(nameof(ResetAttack), timeBetweenAttks);
         alreadyAttacked = true;
-        Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
-
-    private void ResetAttack()
+    void ApplyDamage()            
+    {
+        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            HealthSystem hp = player.GetComponent<HealthSystem>();
+            if (hp) hp.TakeDamage(10);
+        }
+    }
+    void CancelAttack()
+    {
+        animator.ResetTrigger("IsAttacking");
+        animator.CrossFade("Locomotion", 0.05f);
+        alreadyAttacked = false;
+        state = EnemyState.Chasing;
+        agent.isStopped = false;
+    }
+    void ResetAttack()
     {
         alreadyAttacked = false;
-        if (playerInTrigger)
-            agent.isStopped = false; 
+
+        float d = Vector3.Distance(transform.position, player.position);
+        state = (d <= attackRange) ? EnemyState.Attacking :
+                (d <= detectionRange) ? EnemyState.Chasing :
+                EnemyState.Returning;
+
+        agent.isStopped = false;
     }
+    #endregion
 
-    public void TakeDamage(float damage)
+    #region Config
+    void FaceTarget(Vector3 tgt)
     {
-        
+        Vector3 dir = (tgt - transform.position).normalized;
+        Quaternion rot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 5f);
     }
-
-    private void OnDrawGizmosSelected()
+    void ToPatrol()
     {
-        
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, triggerRadius);
-
-       
+        state = EnemyState.Patrolling;
+        GoToNearestPatrolPoint();
+    }
+    void GoToNearestPatrolPoint()
+    {
+        if (!agent.isOnNavMesh || patrolPoints == null || patrolPoints.Length == 0) return;
+        float best = float.MaxValue;
+        for (int i = 0; i < patrolPoints.Length; i++)
+        {
+            float d = Vector3.Distance(transform.position, patrolPoints[i].position);
+            if (d < best) { best = d; patrolIndex = i; }
+        }
+        agent.SetDestination(patrolPoints[patrolIndex].position);
+    }  
+   
+    void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
-        Vector3 origin = transform.position + Vector3.up * 0.5f;
-        Vector3 dir = playerTransform != null
-            ? (playerTransform.position - origin).normalized
-            : transform.forward;
-        Gizmos.DrawLine(origin, origin + dir * attackRayDistance);
+        Gizmos.DrawWireSphere(
+            patrolCenter == Vector3.zero ? transform.position : patrolCenter,
+            patrolRadius);
     }
-    //NavMeshAgent agent;
-
-
-    //void Start()
-    //{
-    //    agent = GetComponent<NavMeshAgent>();
-    //}
-    ////eje z es el frente del pj, usar raicast para hacer el danio
-    //// el piso tiene que tener un NavMeshSurface , bakeado.
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        agent.isStopped = false;
-    //        agent.SetDestination(other.gameObject.transform.position);
-    //    }
-
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //        agent.isStopped = true;
-    //}
+    #endregion
 }
