@@ -17,7 +17,7 @@ namespace Assets.Scripts.Character
         [Header("Referencias")]
         public Transform CinemachineCameraTarget;  // pivot de cámara (hombros)
         public Transform CameraTransform;          // Main Camera transform
-        public Transform BarrelEnd;                // salida de proyectil
+               // salida de proyectil
 
         [Header("Movement")]
         public float WalkSpeed = 2f;
@@ -34,10 +34,7 @@ namespace Assets.Scripts.Character
         public LayerMask ObstacleLayers;
         public float CameraCollisionRadius = 0.3f;
 
-        [Header("Disparo")]
-        public GameObject BulletPrefab;
-        public float BulletRange = 100f;
-        public float BulletSpeed = 20f;
+
 
         // componentes
         CharacterController _controller;
@@ -208,28 +205,12 @@ namespace Assets.Scripts.Character
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Shoot();
+                //Shoot();
                 _animator.SetTrigger("Fire");
             }
         }
 
-        void Shoot()
-        {
-            // raycast instantáneo
-            Ray ray = new Ray(BarrelEnd.position, transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, BulletRange))
-            {
-                // impacto: aplicar daño, efectos, etc.
-            }
-            // opcional: proyectil físico
-            if (BulletPrefab)
-            {
-                GameObject proj = Instantiate(BulletPrefab, BarrelEnd.position,
-                                              Quaternion.LookRotation(transform.forward));
-                if (proj.TryGetComponent<Rigidbody>(out var rb))
-                    rb.velocity = transform.forward * BulletSpeed;
-            }
-        }
+
 
         //void OnAnimatorIK(int layerIndex)
         //{

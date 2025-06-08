@@ -9,6 +9,8 @@ TagManager:
   - Ruin
   - Damage
   - EnemyLvl1
+  - CinemachineTarget
+  - Weapon
   layers:
   - Default
   - TransparentFX
