@@ -17,21 +17,26 @@ public class ZombieSpawner : MonoBehaviour
 
     public void Start()
     {
+        //ZSpawner();
+    }
+
+    public void ZSpawner()
+    {
         foreach (var horde in hordes)
         {
             for (int i = 0; i < horde.numberToSpawn; i++)
             {
-               
+
                 Vector3 navPos = GetRandomNavMeshPosition();
 
-               
+
                 GameObject z = Instantiate(horde.zombiePrefab, navPos, Quaternion.identity);
 
-              
+
                 var agent = z.GetComponent<NavMeshAgent>();
                 if (agent && !agent.isOnNavMesh)
                     agent.Warp(navPos);
-                
+
                 Transform[] pts = GeneratePatrolPointsAround(navPos, /*radius*/ (int)10f, /*count*/ 4);
                 z.GetComponent<EnemiesController>()
                   .AssignPatrolData(navPos, 10f, pts);
