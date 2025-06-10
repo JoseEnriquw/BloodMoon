@@ -17,7 +17,7 @@ namespace Assets.Scripts.Character
         [Header("Referencias")]
         public Transform CinemachineCameraTarget;  // pivot de cámara (hombros)
         public Transform CameraTransform;          // Main Camera transform
-        public Transform BarrelEnd;                // salida de proyectil
+               // salida de proyectil
 
         [Header("Movement")]
         public float WalkSpeed = 2f;
@@ -34,10 +34,7 @@ namespace Assets.Scripts.Character
         public LayerMask ObstacleLayers;
         public float CameraCollisionRadius = 0.3f;
 
-        [Header("Disparo")]
-        public GameObject BulletPrefab;
-        public float BulletRange = 100f;
-        public float BulletSpeed = 20f;
+
 
         // componentes
         CharacterController _controller;
@@ -153,19 +150,20 @@ namespace Assets.Scripts.Character
 
         void HandleAnimations()
         {
+            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 0.5f;
             Vector3 v = _controller.velocity;
             v.y = 0;
             float speedPct = v.magnitude / RunSpeed;
             _animator.SetFloat("Speed", speedPct, 0.1f, Time.deltaTime);
 
             bool aiming = Input.GetMouseButton(1);
-            _animator.SetBool("IsAiming", aiming);
+            //_animator.SetBool("IsAiming", aiming);
 
-            if (aiming)
-            {
-                _animator.SetFloat("AimX", _input.look.x, 0.1f, Time.deltaTime);
-                _animator.SetFloat("AimY", _input.look.y, 0.1f, Time.deltaTime);
-            }
+            //if (aiming)
+            //{
+            //    _animator.SetFloat("AimX", _input.look.x, 0.1f, Time.deltaTime);
+            //    _animator.SetFloat("AimY", _input.look.y, 0.1f, Time.deltaTime);
+            //}
         }
 
         void HandleCamera()
@@ -207,46 +205,30 @@ namespace Assets.Scripts.Character
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Shoot();
+                //Shoot();
                 _animator.SetTrigger("Fire");
             }
         }
 
-        void Shoot()
-        {
-            // raycast instantáneo
-            Ray ray = new Ray(BarrelEnd.position, transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, BulletRange))
-            {
-                // impacto: aplicar daño, efectos, etc.
-            }
-            // opcional: proyectil físico
-            if (BulletPrefab)
-            {
-                GameObject proj = Instantiate(BulletPrefab, BarrelEnd.position,
-                                              Quaternion.LookRotation(transform.forward));
-                if (proj.TryGetComponent<Rigidbody>(out var rb))
-                    rb.velocity = transform.forward * BulletSpeed;
-            }
-        }
 
-        void OnAnimatorIK(int layerIndex)
-        {
-            bool aiming = _animator.GetBool("IsAiming");
-            if (aiming)
-            {
-                _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
-                _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
-                Vector3 aimPoint = CameraTransform.position + CameraTransform.forward * BulletRange;
-                _animator.SetIKPosition(AvatarIKGoal.RightHand, aimPoint);
-                _animator.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.LookRotation(CameraTransform.forward));
-            }
-            else
-            {
-                _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
-                _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
-            }
-        }
+
+        //void OnAnimatorIK(int layerIndex)
+        //{
+        //    bool aiming = _animator.GetBool("IsAiming");
+        //    if (aiming)
+        //    {
+        //        _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
+        //        _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
+        //        Vector3 aimPoint = CameraTransform.position + CameraTransform.forward * BulletRange;
+        //        _animator.SetIKPosition(AvatarIKGoal.RightHand, aimPoint);
+        //        _animator.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.LookRotation(CameraTransform.forward));
+        //    }
+        //    else
+        //    {
+        //        _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
+        //        _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
+        //    }
+        //}
     }
 
 

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
 
 public class BulletsManager : MonoBehaviour, ICollectible
 {
@@ -17,8 +13,7 @@ public class BulletsManager : MonoBehaviour, ICollectible
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            var healthcomponent = other.GetComponent<EnemyHealth>();
-            if (healthcomponent != null)
+            if (other.TryGetComponent<EnemyHealth>(out var healthcomponent))
             {
                 healthcomponent.ReciveDamage(_value);
             }

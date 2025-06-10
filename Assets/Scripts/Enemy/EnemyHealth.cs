@@ -35,8 +35,7 @@ public class EnemyHealth : MonoBehaviour
             isDead = true;
             animator.SetBool("IsDead ", true);
             audioSource.PlayOneShot(deathSound);
-            var nav = GetComponent<NavMeshAgent>();
-            if (nav != null)
+            if (TryGetComponent<NavMeshAgent>(out var nav))
             {
                 nav.isStopped = true;
                 nav.enabled = false;

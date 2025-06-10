@@ -11,6 +11,7 @@ TagManager:
   - EnemyLvl1
   - CinemachineTarget
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
