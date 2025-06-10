@@ -1,17 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
+[RequireComponent(typeof(Animator))]
 public class WeaponManager : MonoBehaviour
 {
-    //[Header("Ray Settings")]
-    //[SerializeField][Range(0.0f, 2.0f)] private float rayLength;
-    //[SerializeField] private Vector3 rayOffset;
-    //[SerializeField] private LayerMask weaponMask;
-    //private RaycastHit topRayHitInfo;
-    //private RaycastHit bottomRayHitInfo;
-
-
     [SerializeField] private Weapon currentWeapon;
 
     [Header("Weapon Positions Settings")]
@@ -19,104 +11,47 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Transform equipPos;
     [SerializeField] private Transform aimingPos;
 
-    private Animator playerAnimator;
-
-    private bool isAiming;
-
     [Header("Right Hand Target")]
     [SerializeField] private TwoBoneIKConstraint rightHandIK;
     [SerializeField] private Transform rightHandTarget;
+    [SerializeField] private Transform rightHandHint;
 
     [Header("Left Hand Target")]
     [SerializeField] private TwoBoneIKConstraint leftHandIK;
     [SerializeField] private Transform leftHandTarget;
+    [SerializeField] private Transform leftHandHint;
 
+    [Header("IK Positions")]
     [SerializeField] private Transform IKRightHandPos;
     [SerializeField] private Transform IKLeftHandPos;
+    [SerializeField] private Transform IKLeftHandHintPos;
+    [SerializeField] private Transform IKRightHandHintPos;
 
+    private Animator playerAnimator;
+    private bool IsAiming;
     private bool IsEquiped;
 
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
         IsEquiped = false;
+        IsAiming = false;
+        rightHandIK.weight = 0.0f;
+        leftHandIK.weight = 0.0f;
         PutBackWeapon();
     }
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.E))
-        //{
-        //    Equip();
-        //}
-
         HandleAnimations();
-
-        //if(Input.GetButton("Fire1"))
-        //{
-        //    playerAnimator.SetBool("RevolverAim", true);
-
-        //    isAiming = true;
-        //}
-        //else if (Input.GetButtonUp("Fire1"))
-        //{
-        //    playerAnimator.SetBool("RevolverAim", false);
-
-        //    isAiming = false;
-        //}
-
-        //if (Input.GetButtonDown("Fire2"))
-        //{
-        //    playerAnimator.SetBool("AssaultAim", true);
-
-        //    isAiming = true;
-        //}
-        //else if (Input.GetButtonUp("Fire2"))
-        //{
-        //    playerAnimator.SetBool("AssaultAim", false);
-
-        //    isAiming = false;
-        //}
-
-        //if(currentWeapon)
-        //{
-        //    if(!isAiming)
-        //    {
-        //        currentWeapon.transform.parent = equipPos.transform;
-        //        currentWeapon.transform.position = equipPos.position;
-        //        currentWeapon.transform.rotation = equipPos.rotation;
-
-        //        leftHandIK.weight = 0f;
-        //    }
-        //    else
-        //    {
-        //        //currentWeapon.transform.parent = aimingPos.transform;
-        //        //currentWeapon.transform.position = aimingPos.position;
-        //        //currentWeapon.transform.rotation = aimingPos.rotation;
-
-        //        leftHandIK.weight = 1f;
-        //        leftHandTarget.position = IKLeftHandPos.position;
-        //        leftHandTarget.rotation = IKLeftHandPos.rotation;
-        //    }
-
-        //    //rightHandIK.weight = 1f;
-        //    //rightHandTarget.position = IKRightHandPos.position;
-        //    //rightHandTarget.rotation = IKRightHandPos.rotation;
-        //}
-
+        HandleRigging();
     }
-
 
     public void PutBackWeapon()
     {
         if (currentWeapon == null) return;
         currentWeapon.transform.parent = weaponHolderPos.parent;
         currentWeapon.transform.SetPositionAndRotation(weaponHolderPos.position, weaponHolderPos.rotation);
-        rightHandIK.weight = 0.0f;
-        if (IKLeftHandPos)
-        {
-            leftHandIK.weight = 0.0f;
-        }
     }
 
     public void TakeWeapon()
@@ -125,13 +60,11 @@ public class WeaponManager : MonoBehaviour
         // Set weapon parent and position.
         currentWeapon.transform.parent = equipPos;
         currentWeapon.transform.SetPositionAndRotation(equipPos.position, equipPos.rotation);
-        rightHandIK.weight = 1.0f;
-        rightHandTarget.SetPositionAndRotation(IKRightHandPos.position, IKRightHandPos.rotation);
-        if (IKLeftHandPos)
-        {
-            leftHandIK.weight = 1.0f;
-            leftHandTarget.SetPositionAndRotation(IKLeftHandPos.position, IKLeftHandPos.rotation);
-        }
+    }
+
+    public void SetAiming()
+    {
+        IsAiming = !IsAiming;
     }
 
     public void Shoot() 
@@ -141,7 +74,10 @@ public class WeaponManager : MonoBehaviour
         Debug.Log("Shooting with weapon: " + currentWeapon.name);
 
         currentWeapon.Shoot();
+        playerAnimator.SetBool("Shoot", false);
     }
+
+
     #region Animation
 
     private void HandleAnimations()
@@ -154,6 +90,21 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsEquiped)
         {
             ShootAnimation();
+        }
+    }
+
+    void HandleRigging()
+    {
+        if (!IsAiming)
+        {
+            leftHandIK.weight = 0f;
+            rightHandIK.weight = 0.0f;
+        }
+        else
+        {
+            leftHandIK.weight = 1f;
+            leftHandTarget.SetPositionAndRotation(IKLeftHandPos.position, IKLeftHandPos.rotation);
+            leftHandHint.SetPositionAndRotation(IKLeftHandHintPos.position, IKLeftHandHintPos.rotation);  
         }
     }
 
@@ -177,60 +128,4 @@ public class WeaponManager : MonoBehaviour
 
     #endregion
 
-        //private void RaycastsHandler()
-        //{
-        //    Ray topRay = new Ray(transform.position + rayOffset, transform.forward);
-        //    Ray bottomRay = new Ray(transform.position + Vector3.up * 0.175f, transform.forward);
-
-    //    Debug.DrawRay(transform.position + rayOffset, transform.forward * rayLength, Color.red);
-    //    Debug.DrawRay(transform.position + Vector3.up * 0.175f, transform.forward * rayLength, Color.green);
-
-    //    Physics.Raycast(topRay, out topRayHitInfo, rayLength, weaponMask);
-    //    Physics.Raycast(bottomRay, out bottomRayHitInfo, rayLength, weaponMask);
-    //}
-
-    //private void Equip()
-    //{
-    //    RaycastsHandler();
-
-    //    if (topRayHitInfo.collider != null)
-    //    {
-    //        currentWeapon = topRayHitInfo.transform.gameObject.GetComponent<Weapon>();
-    //    }
-
-    //    if (bottomRayHitInfo.collider)
-    //    {
-    //        currentWeapon = bottomRayHitInfo.transform.gameObject.GetComponent<Weapon>();
-    //    }
-
-    //    if (!currentWeapon) return;
-
-    //    // Stop weapon rotation.
-    //    currentWeapon.IsRotating = false;
-
-    //    currentWeapon.ChangeWeaponBehaviour();
-
-    //    IsEquiped = true;
-    //}
-
-    //private void UnEquip()
-    //{
-    //    if (IsEquiped)
-    //    {
-    //        rightHandIK.weight = 0.0f;
-
-    //        if (IKLeftHandPos)
-    //        {
-    //            leftHandIK.weight = 0.0f;
-    //        }
-
-    //        IsEquiped = false;
-    //        currentWeapon.transform.parent = null;
-
-    //        currentWeapon.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-    //        currentWeapon.GetComponent<Rigidbody>().isKinematic = false;
-
-    //        currentWeapon = null;
-    //    }
-    //}
-    }
+}

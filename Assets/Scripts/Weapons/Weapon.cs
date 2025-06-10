@@ -1,14 +1,20 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
     [Header("Disparo")]
-    public GameObject BulletPrefab;
-    public float BulletRange = 100f;
-    public float BulletSpeed = 20f;
+    [SerializeField] private GameObject BulletPrefab;
+    [SerializeField] float BulletRange = 100f;
+    [SerializeField] float BulletSpeed = 20f;
+    [SerializeField] string WeaponName = "Default Weapon";
+    [SerializeField] Transform WeaponMuzzle;
+    [SerializeField] private AudioClip shootAudioClip;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -17,19 +23,16 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        // raycast instantáneo
-        Ray ray = new(gameObject.transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, BulletRange))
-        {
-            // impacto: aplicar daño, efectos, etc.
-        }
         // opcional: proyectil físico
         if (BulletPrefab)
         {
-            GameObject proj = Instantiate(BulletPrefab, gameObject.transform.position,
-                                          Quaternion.LookRotation(transform.forward));
+            GameObject proj = Instantiate(BulletPrefab, WeaponMuzzle.transform.position,
+                                          Quaternion.LookRotation(WeaponMuzzle.transform.right));
             if (proj.TryGetComponent<Rigidbody>(out var rb))
-                rb.velocity = transform.forward * BulletSpeed;
+                rb.velocity = WeaponMuzzle.transform.forward * BulletSpeed;
+
+            if(shootAudioClip != null)
+                audioSource.PlayOneShot(shootAudioClip);
         }
     }
 }
