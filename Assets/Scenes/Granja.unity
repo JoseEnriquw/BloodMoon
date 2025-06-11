@@ -18568,7 +18568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1312956572
 Transform:
   m_ObjectHideFlags: 0
@@ -19029,7 +19029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1363556499
 Transform:
   m_ObjectHideFlags: 0
@@ -21336,7 +21336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1524619905
 Transform:
   m_ObjectHideFlags: 0
@@ -23049,6 +23049,11 @@ MonoBehaviour:
   gridSize: 10
   tileSize: 15
   gira: 1
+  fencePrefab: {fileID: 3706606216855555088, guid: d54ca1457806a7442b5e509685e96e7d,
+    type: 3}
+  gatePrefab: {fileID: 1951503545145631752, guid: 98cb70323f0935348b0516866ad5120c,
+    type: 3}
+  colocarPuerta: 1
   navMeshSurface: {fileID: 1650919204}
 --- !u!114 &1650919204
 MonoBehaviour:
@@ -26980,7 +26985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1958109198
 Transform:
   m_ObjectHideFlags: 0
