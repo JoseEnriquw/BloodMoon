@@ -26,6 +26,7 @@ public class FarmGenerator : MonoBehaviour
     [Header("Cercas")]
     public GameObject limitePrefab;      // Cerca genérica de 3x1
     public GameObject salidaPrefab;       // Puerta de salida
+    public GameObject cornerPrefab;
 
     public bool colocarPuerta = true;
 
@@ -230,6 +231,8 @@ public class FarmGenerator : MonoBehaviour
             Instantiate(prefabOeste, posOeste, rot, transform);
             Instantiate(prefabEste, posEste, rot, transform);
         }
+        
+        PlaceFenceCorners();
     }
     private void SpawnItems(GameObject item, int cantidad)
     {
@@ -254,5 +257,17 @@ public class FarmGenerator : MonoBehaviour
         return transform.position; // fallback
     }
 
+    void PlaceFenceCorners()
+    {
+        Vector3 esquinaSO = new Vector3(-tileSize, 0, -tileSize);
+        Vector3 esquinaSE = new Vector3(gridSize * tileSize, 0, -tileSize);
+        Vector3 esquinaNO = new Vector3(-tileSize, 0, gridSize * tileSize);
+        Vector3 esquinaNE = new Vector3(gridSize * tileSize, 0, gridSize * tileSize);
+
+        Instantiate(cornerPrefab, esquinaSO, Quaternion.Euler(0, 180, 0), transform);
+        Instantiate(cornerPrefab, esquinaSE, Quaternion.Euler(0, 90, 0), transform);
+        Instantiate(cornerPrefab, esquinaNO, Quaternion.Euler(0, 270, 0), transform);
+        Instantiate(cornerPrefab, esquinaNE, Quaternion.Euler(0, 0, 0), transform);
+    }
 }
 
