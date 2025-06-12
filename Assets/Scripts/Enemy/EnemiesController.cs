@@ -27,6 +27,7 @@ public class EnemiesController : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float timeBetweenAttks = 1f;
     private bool alreadyAttacked;
+    [SerializeField] private int attackDamage = 10;
 
     
     [Header("Audio")]
@@ -170,8 +171,8 @@ public class EnemiesController : MonoBehaviour
     {
         if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            HealthSystem hp = player.GetComponent<HealthSystem>();
-            if (hp) hp.TakeDamage(10);
+            var hp = player.GetComponent<PlayerHealth>();
+            if (hp) hp.ReciveDamage(attackDamage);
         }
     }
     void CancelAttack()
