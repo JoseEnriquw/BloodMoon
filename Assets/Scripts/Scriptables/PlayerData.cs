@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     public float Health;
+    public float MaxHealth;
     public int Bullets;
     public int Runes;
     public Vector3 LastPosition;

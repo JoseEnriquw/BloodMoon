@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 
 public class InitLoader : MonoBehaviour
 {
-    [SerializeField] private string sceneToLoad = "Nivel1";
+    [SerializeField] private string sceneToLoad = "Granja";
     [SerializeField] private float delay = 1.5f; // segundos opcionales de espera
 
     private void Start()
