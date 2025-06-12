@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.AI;
 
 public enum EnemyState { Patrolling, Chasing, Attacking, Returning }
@@ -38,7 +39,8 @@ public class EnemiesController : MonoBehaviour
  
     private EnemyState state = EnemyState.Patrolling;
 
-   
+    [SerializeField] private float speed;
+    [SerializeField] private float acceleration;
     #region Inicialización 
     public void AssignPatrolData(Vector3 center, float radius, Transform[] points)
     {
@@ -64,6 +66,9 @@ public class EnemiesController : MonoBehaviour
 
     void Start()
     {
+        agent.speed = speed;// 1.8f; // Ajustá esto para que coincida con la velocidad visual del walk de Mixamo
+        agent.acceleration = acceleration;// 4f; // Opcional: para suavizar la salida
+
         if (patrolPoints != null && patrolPoints.Length > 0 && agent.isOnNavMesh)
             agent.SetDestination(patrolPoints[0].position);
     }
@@ -115,6 +120,8 @@ public class EnemiesController : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (health.isDead || !other.CompareTag("Player")) return;
+
+        agent.speed = 4f;
         float distToCenter = Vector3.Distance(other.transform.position, patrolCenter);
         if (distToCenter > patrolRadius)
         {
@@ -143,6 +150,7 @@ public class EnemiesController : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         CancelAttack();
+        agent.speed = speed;
         state = EnemyState.Returning;
         agent.isStopped = false;
         if (agent.isOnNavMesh)
@@ -177,6 +185,7 @@ public class EnemiesController : MonoBehaviour
     }
     void ResetAttack()
     {
+        if (health.isDead) return;
         alreadyAttacked = false;
 
         float d = Vector3.Distance(transform.position, player.position);
