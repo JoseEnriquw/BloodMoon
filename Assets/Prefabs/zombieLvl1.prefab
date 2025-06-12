@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9194433516816426548, guid: 6fd49189e8ccb3b4e94297f38722aee9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fd49189e8ccb3b4e94297f38722aee9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6fd49189e8ccb3b4e94297f38722aee9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fd49189e8ccb3b4e94297f38722aee9,
         type: 3}
@@ -63,6 +68,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4799229518886428059, guid: 6fd49189e8ccb3b4e94297f38722aee9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 396820112205948169, guid: 6fd49189e8ccb3b4e94297f38722aee9,
         type: 3}
       propertyPath: m_IsActive
@@ -92,6 +102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.083
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 6fd49189e8ccb3b4e94297f38722aee9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -190,7 +205,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &6411842058173505107
@@ -253,7 +268,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -266,7 +281,7 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 0
+  BypassListenerEffects: 1
   BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
@@ -353,6 +368,7 @@ MonoBehaviour:
   detectionRange: 10
   attackRange: 2
   timeBetweenAttks: 1
+  attackDamage: 20
   walkClip: {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
   hitClip: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
   walkClipCooldown: 0.7
