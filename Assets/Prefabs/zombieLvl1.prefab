@@ -200,7 +200,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -372,3 +372,5 @@ MonoBehaviour:
   walkClip: {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
   hitClip: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
   walkClipCooldown: 0.7
+  speed: 0
+  acceleration: 0

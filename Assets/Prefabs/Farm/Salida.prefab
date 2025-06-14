@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Nivel2
+  cantRuna: 1
+  playerData: {fileID: 11400000, guid: e67d6a4cb81a4ef4597a250fb2ad1387, type: 2}
 --- !u!1001 &768021361468497871
 PrefabInstance:
   m_ObjectHideFlags: 0

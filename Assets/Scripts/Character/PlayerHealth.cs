@@ -29,7 +29,8 @@ public class PlayerHealth : MonoBehaviour
         if (playerData.Health <=0 &&!isDead)
         {
             isDead = true;
-           // anim.SetBool("isDeath", true);
+            GameManager.Instance.Perder();
+            // anim.SetBool("isDeath", true);
             //pasar a pantalla de derrota
             return;
         }
