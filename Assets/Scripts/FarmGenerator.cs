@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +47,6 @@ public class FarmGenerator : MonoBehaviour
     IEnumerator GenerateFarmRoutine()
     {
         // Construir el NavMesh
-        yield return new WaitForEndOfFrame();
         navMeshSurface.BuildNavMesh();
 
         // Esperar hasta que el NavMesh esté listo
@@ -56,7 +54,7 @@ public class FarmGenerator : MonoBehaviour
 
         // Esperar un frame adicional para asegurar que todo está inicializado
         yield return null;
-        yield return new WaitForSeconds(0.2f);
+
         // Activar todos los spawners
         ActivateAllSpawners();
     }
@@ -205,3 +203,4 @@ public class FarmGenerator : MonoBehaviour
     }
 
 }
+

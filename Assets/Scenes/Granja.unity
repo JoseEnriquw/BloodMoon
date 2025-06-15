@@ -476,26 +476,11 @@ MonoBehaviour:
   gridSize: 10
   tileSize: 15
   gira: 1
-  limitePrefab: {fileID: 3706606216855555088, guid: d54ca1457806a7442b5e509685e96e7d,
+  fencePrefab: {fileID: 3706606216855555088, guid: d54ca1457806a7442b5e509685e96e7d,
     type: 3}
-  salidaPrefab: {fileID: 3706606216855555088, guid: 5f6c9ddfe4378ee4c8aee51587cbf0f4,
+  gatePrefab: {fileID: 3706606216855555088, guid: 3ac1a7497dac21343b4d83352c7b979e,
     type: 3}
-  cornerPrefab: {fileID: 0}
   colocarPuerta: 1
-  vidasPrefab: {fileID: 582445512381467609, guid: e8542fed502c3754996597300ad5427b,
-    type: 3}
-  vidas2Prefab: {fileID: 219884855131855774, guid: 9124f878ee1908c49a6a768c0a102e3a,
-    type: 3}
-  balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
-    type: 3}
-  runa: {fileID: 5047770990850621904, guid: 0885db413762b8f4ca3438de388b2917, type: 3}
-  cantidadBalas: 5
-  cantidadVidas: 5
-  cantidadVidas2: 5
-  mapRadius: 100
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   navMeshSurface: {fileID: 1650919204}
 --- !u!114 &1650919204
 MonoBehaviour:
