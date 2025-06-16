@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1982,6 +1982,59 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageFinal.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e7d07934557c8c49b4bd67f7dad8fed,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageFinal.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 11e53794b84f73a43af07d79d703347f,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageFinal.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 383e65eb34a9eab4397d5197102da8b7,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 315113f5658f8df429b4fdc66e20d2c7,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 76f09abb6b471104eb8ba2535ea52193,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 65a2973909dd3bf419fcb799769c73e6,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: e788a42674a18a04bb51bbb6c87dab35,
+        type: 3}
+    - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: imageInicio.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: c73ddf7f3f8e9544795114155a14cce6,
+        type: 3}
     - target: {fileID: 8334240424446234031, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_Name

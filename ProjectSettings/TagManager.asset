@@ -12,6 +12,8 @@ TagManager:
   - CinemachineTarget
   - Enemy
   - Weapon
+  - Floor
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Water
   - UI
   - playerLayer
-  - 
+  - Blocked
   - 
   - 
   - 
