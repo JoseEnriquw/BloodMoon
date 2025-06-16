@@ -478,10 +478,24 @@ MonoBehaviour:
   gira: 1
   fencePrefab: {fileID: 3706606216855555088, guid: d54ca1457806a7442b5e509685e96e7d,
     type: 3}
-  gatePrefab: {fileID: 3706606216855555088, guid: 3ac1a7497dac21343b4d83352c7b979e,
+  gatePrefab: {fileID: 3706606216855555088, guid: 5f6c9ddfe4378ee4c8aee51587cbf0f4,
+    type: 3}
+  cornerPrefab: {fileID: 3706606216855555088, guid: 3ac1a7497dac21343b4d83352c7b979e,
     type: 3}
   colocarPuerta: 1
   navMeshSurface: {fileID: 1650919204}
+  vidasPrefab: {fileID: 0}
+  balasPrefab: {fileID: 0}
+  runaPrefab: {fileID: 0}
+  cantidadVidas: 5
+  cantidadBalas: 5
+  mapRadius: 100
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  blockedLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1650919204
 MonoBehaviour:
   m_ObjectHideFlags: 0

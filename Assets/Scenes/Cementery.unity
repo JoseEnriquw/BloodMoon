@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogColor: {r: 0.4056604, g: 0.380785, b: 0.380785, a: 1}
+  m_FogMode: 2
+  m_FogDensity: 0.22
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 51b74d7bad397457d883c5940f7664d8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.057436652, g: 0.048449125, b: 0.029342163, a: 1}
+  m_IndirectSpecularColor: {r: 0.009012734, g: 0.013102855, b: 0.02050359, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -170,14 +170,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 7927996924613368008, guid: e01ee1adcc8c1a643813b8ea458108a1, type: 3}
+  - {fileID: 6801481766141440472, guid: 4c41a7a6fbc84a54cb86aa8e23336b0e, type: 3}
   - {fileID: 5888000953220528254, guid: 5979630d7de2e3146b60f503a270e5a4, type: 3}
   - {fileID: 827419005191480808, guid: bf50518d90f06bd4ab50184133973813, type: 3}
   - {fileID: 6839285081296161748, guid: c7f8089805b347c4b8cdafa47b36fba5, type: 3}
   casaPrefab: {fileID: 2108837271305019365, guid: eaccd76cd7d75264b905abdffb5e1f75,
     type: 3}
   edificioPrefabs:
-  - {fileID: 7927996924613368008, guid: e01ee1adcc8c1a643813b8ea458108a1, type: 3}
+  - {fileID: 6801481766141440472, guid: 4c41a7a6fbc84a54cb86aa8e23336b0e, type: 3}
   - {fileID: 9022475196746396247, guid: d033c5a910cd1974fa5cb317c87312f2, type: 3}
   - {fileID: 5623640221231161772, guid: ee0fc2e6da7f0204bbf2531a223f3b66, type: 3}
   - {fileID: 1406521359687652862, guid: 5b130997e63062e498145481b7065aeb, type: 3}
@@ -187,10 +187,27 @@ MonoBehaviour:
   gira: 0
   fencePrefab: {fileID: 943829013080367794, guid: 1b4530a13804d6942a11e970905a32ff,
     type: 3}
-  gatePrefab: {fileID: 7242663623969748406, guid: f4a0d72d002f8784f8422521eb4c1686,
+  gatePrefab: {fileID: 943829013080367794, guid: 1b4530a13804d6942a11e970905a32ff,
+    type: 3}
+  cornerPrefab: {fileID: 7242663623969748406, guid: f4a0d72d002f8784f8422521eb4c1686,
     type: 3}
   colocarPuerta: 0
   navMeshSurface: {fileID: 763417385}
+  vidasPrefab: {fileID: 582445512381467609, guid: e8542fed502c3754996597300ad5427b,
+    type: 3}
+  balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
+    type: 3}
+  runaPrefab: {fileID: 5047770990850621904, guid: b4d3e125ce0aa38468f7f54f41148ab6,
+    type: 3}
+  cantidadVidas: 5
+  cantidadBalas: 5
+  mapRadius: 100
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  blockedLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &763417385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +262,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   mapRadius: 100
+  safeBorder: 2
+  verticalOffset: 0.5
 --- !u!1 &1623027491
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,13 +489,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027292460}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.052286197, y: -0.2584395, z: -0.01401006, w: 0.96450967}
+  m_LocalRotation: {x: 0.11641813, y: -0.2569322, z: 0.031194117, w: 0.95888454}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -6.206, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.845, y: -30, z: 0}
 --- !u!114 &2027292463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +519,74 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &2062365915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2062365918}
+  - component: {fileID: 2062365917}
+  - component: {fileID: 2062365916}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2062365916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062365915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &2062365917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062365915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &2062365918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062365915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -507,3 +594,4 @@ SceneRoots:
   - {fileID: 1623027494}
   - {fileID: 2027292462}
   - {fileID: 763417383}
+  - {fileID: 2062365918}

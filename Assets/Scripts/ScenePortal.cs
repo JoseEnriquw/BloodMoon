@@ -8,7 +8,8 @@ public class ScenePortal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.gameManager.ChangeScene(sceneToLoad);
+            GameSceneManager.Instance.LoadNextScene();
+           // GameManager.gameManager.ChangeScene(sceneToLoad);
         }
     }
 }

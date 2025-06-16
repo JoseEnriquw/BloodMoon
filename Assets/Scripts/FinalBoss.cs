@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,30 +6,47 @@ using UnityEngine.SceneManagement;
 
 public class FinalBoss : MonoBehaviour
 {
-    public GameObject portal; // asigna tu particula de portal en el inspector
-    public PlayerData playerData; // referencia al ScriptableObject
-    public string finalSceneName = "NombreDeTuEscenaFinal";
+    [SerializeField] private GameObject portal;
+     private ComicSequence comicSequence;
+    public static event Action portalActivated;
+    private void Start()
+    {
+        portal.SetActive(false);
+        RuinManager.OnAllRunesCollected += ActivatePortal;
+        
+    }
 
-    //private void Start()
-    //{
-    //    portal.SetActive(false); // asegurarse de que el portal est� desactivado al inicio
-    //}
+    private void OnDestroy()
+    {
+        RuinManager.OnAllRunesCollected -= ActivatePortal; 
+    }
 
-    //private void Update()
-    //{
-    //    if (playerData.Runes >= 3 && !portal.activeSelf)
-    //    {
-    //        portal.SetActive(true); // activamos el portal
-    //        Debug.Log("Portal activado!");
-    //    }
-    //}
+    private void ActivatePortal()
+    {
+        if (!portal.activeSelf)
+        {
+            portal.SetActive(true);
+            Debug.Log("🚪 Portal activado al recolectar 3 runas!");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (portal.activeSelf && other.CompareTag("Player"))
+        {
+            Debug.Log("🎬 Entrando al portal. Iniciando historia final...");
+            if (ComicSequence.Instance != null)
+            {
+                ComicSequence.Instance.StartComicSequence("final");
+            }
+            else
+            {
+                Debug.LogError("❌ ComicSequence.Instance es null");
+            }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player") && portal.activeSelf)
-    //    {
-    //        Debug.Log("Entrando al portal...");
-    //        SceneManager.LoadScene(finalSceneName); // carga la escena final
-    //    }
-    //}
+            //portalActivated?.Invoke();
+            //comicSequence = FindObjectOfType<ComicSequence>();
+            //comicSequence.StartComicSequence("final");
+            this.enabled = false; // Evita múltiples disparos
+        }
+    }
 }
