@@ -8,11 +8,12 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         //SceneManager.LoadScene("Nivel1"); 
-        GameSceneManager.Instance.LoadNextScene();
+        GameManager.gameManager.ResetData();
+        GameSceneManager.Instance.LoadSceneByIndex(1);
     }
     public void ContinueGame()
     {
-
+        GameManager.gameManager.LoadData();
     }
     public void OpenOptions()
     {

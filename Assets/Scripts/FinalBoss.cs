@@ -35,6 +35,7 @@ public class FinalBoss : MonoBehaviour
             Debug.Log("🎬 Entrando al portal. Iniciando historia final...");
             if (ComicSequence.Instance != null)
             {
+                portalActivated?.Invoke();
                 ComicSequence.Instance.StartComicSequence("final");
             }
             else

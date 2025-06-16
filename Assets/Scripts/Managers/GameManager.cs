@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -40,16 +40,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // UpdateUi();
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
         _healthTemp = playerData.Health;
         _bulletTemp = playerData.Bullets;
-        _ruinsTemp = playerData.Runes;
+        _ruinsTemp = playerData.Runes;      
         
-        LoadData();
         
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         if (_healthTemp != playerData.Health ||
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour
 
    
 
-    public void SaveData(string sceneName = null)
+    public void SaveData(int sceneIndex = -1)
     {
         string path = Application.persistentDataPath + "/GameInfo.dat";
 
@@ -75,15 +74,29 @@ public class GameManager : MonoBehaviour
         {
             BinaryFormatter bf = new BinaryFormatter();
 
+            if (gameInfo == null)
+                gameInfo = new GameInfo(); // Solo si todavía no hay uno
+
+            // Actualizamos el objeto existente
+            gameInfo.Health = playerData.Health;
+            gameInfo.Bullets = playerData.Bullets;
+            gameInfo.Runes = playerData.Runes;
+            gameInfo.LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex;
+
+            // Asegurar que LevelsWithRune no sea null
+            if (gameInfo.LevelsWithRune == null)
+                gameInfo.LevelsWithRune = new List<int>();
+
             using (FileStream fileStream = File.Create(path))
             {
-                GameInfo gameInfo = new GameInfo
-                {
-                    Health = playerData.Health,
-                    Bullets = playerData.Bullets,
-                    Runes = playerData.Runes,
-                    LastScene = sceneName ?? SceneManager.GetActiveScene().name
-                };
+                //GameInfo gameInfo = new GameInfo
+                //{
+                //    Health = playerData.Health,
+                //    Bullets = playerData.Bullets,
+                //    Runes = playerData.Runes,
+                //    LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex
+                   
+                // };
 
                 bf.Serialize(fileStream, gameInfo);
                 
@@ -118,10 +131,20 @@ public class GameManager : MonoBehaviour
                         playerData.Health = gameInfo.Health;
                         playerData.Bullets = gameInfo.Bullets;
                         playerData.Runes = gameInfo.Runes;
+
+                        if (gameInfo.LevelsWithRune == null)
+                            gameInfo.LevelsWithRune = new List<int>();
                     }
-                    if (!string.IsNullOrEmpty(gameInfo.LastScene) && gameInfo.LastScene != SceneManager.GetActiveScene().name)
+                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
+                    if (gameInfo.LastSceneIndex != currentIndex)
                     {
-                        SceneManager.LoadScene(gameInfo.LastScene);
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    }
+                    else
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(1);
                     }
                 }
                 catch (System.Exception e)
@@ -131,12 +154,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("El archivo existe pero est� vac�o.");
+                Debug.LogWarning("El archivo existe pero está vacío.");
             }
         }
         else
         {
-            Debug.Log("No se encontr� el archivo de guardado.");
+            Debug.Log("No se encontró el archivo de guardado.");
         }
     }
 
@@ -145,24 +168,54 @@ public class GameManager : MonoBehaviour
         SaveData();
     }
 
-   
-    public void ChangeScene(string sceneName)
-    {
-        SaveData(sceneName);
-        SceneManager.LoadScene(sceneName);
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded()
     {
         StartCoroutine(UpdateHUDNextFrame());
-        // UIManager.Instance?.UpdateHUD(playerData.Health, playerData.Bullets, playerData.Runes);
+       
     }
     private IEnumerator UpdateHUDNextFrame()
     {
         while (UIManager.Instance == null)
         {
-            yield return null; // espera 1 frame
+            yield return null; 
         }
 
         UIManager.Instance?.UpdateHUD(playerData.Health, playerData.Bullets, playerData.Runes);
     }
+    public void ResetData()
+    {
+        string path = Application.persistentDataPath + "/GameInfo.dat";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("🗑 Archivo de guardado eliminado.");
+        }
+        
+        playerData.Health = 100f;
+        playerData.Bullets = 0;
+        playerData.Runes = 0;
+    }
+
+    public bool HasRuneForLevel(int sceneIndex)
+    {
+        return gameInfo != null && gameInfo.LevelsWithRune.Contains(sceneIndex);
+    }
+
+    public void MarkRuneAsCollected(int sceneIndex)
+    {
+        if (gameInfo == null)
+            gameInfo = new GameInfo();
+
+        if (gameInfo.LevelsWithRune == null)
+            gameInfo.LevelsWithRune = new List<int>();
+
+        if (!gameInfo.LevelsWithRune.Contains(sceneIndex))
+        {
+            gameInfo.LevelsWithRune.Add(sceneIndex);
+            SaveData(); // Ahora guarda con los cambios actualizados
+        }
+    }
+
+
 }
