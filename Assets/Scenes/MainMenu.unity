@@ -820,7 +820,7 @@ PrefabInstance:
         type: 3}
       propertyPath: canvasRoot
       value: 
-      objectReference: {fileID: 293899251}
+      objectReference: {fileID: 0}
     - target: {fileID: 4127593723212592862, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: imageFinal.Array.size
@@ -889,12 +889,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 412f072b2dcf06f49b0b605174973de8, type: 3}
---- !u!223 &293899251 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 2783613949297072072, guid: 412f072b2dcf06f49b0b605174973de8,
-    type: 3}
-  m_PrefabInstance: {fileID: 293899250}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &305204155
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +956,50 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &343415287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343415289}
+  - component: {fileID: 343415288}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &343415288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343415287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a075e8ee906bd4283a1c2ccf082375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &343415289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343415287}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 78.335884, y: -2.7436268, z: 156.73087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350227479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,3 +4350,4 @@ SceneRoots:
   - {fileID: 1350692540}
   - {fileID: 293899250}
   - {fileID: 124595879}
+  - {fileID: 343415289}
