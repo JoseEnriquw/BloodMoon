@@ -12,7 +12,7 @@ public class ScenePortal : MonoBehaviour
         {
             if (cantRuna == playerData.Runes)
             {
-                GameManager.gameManager.ChangeScene(sceneToLoad);
+                GameSceneManager.Instance.LoadNextScene(); 
             }
             else
             {
