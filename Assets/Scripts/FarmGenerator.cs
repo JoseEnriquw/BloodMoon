@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,13 +7,13 @@ using Unity.AI.Navigation;
 public class FarmGenerator : MonoBehaviour
 {
     [Header("Tiles de base")]
-    public GameObject[] tilePrefabs; // Tiles gen�ricos
+    public GameObject[] tilePrefabs; // Tiles genéricos
 
-    [Header("Prefabs �nicos")]
+    [Header("Prefabs únicos")]
     public GameObject casaPrefab; // Donde aparece el jugador
-    public GameObject[] edificioPrefabs; // Edificios �nicos
+    public GameObject[] edificioPrefabs; // Edificios únicos
 
-    [Header("Configuraci�n de grilla")]
+    [Header("Configuración de grilla")]
     public int gridSize = 10;
     public float tileSize = 1f;
 
@@ -21,30 +21,36 @@ public class FarmGenerator : MonoBehaviour
 
     private List<Vector2Int> freePositions = new List<Vector2Int>();
 
-    
+
 
     [Header("Cercas")]
-    public GameObject limitePrefab;      // Cerca gen�rica de 3x1
-    public GameObject salidaPrefab;       // Puerta de salida
-    public GameObject cornerPrefab;
+    public GameObject fencePrefab;      // Cerca genérica de 3x1
+    public GameObject gatePrefab;       // Puerta de salida
+    public GameObject cornerPrefab; // Prefab de esquina
 
     public bool colocarPuerta = true;
 
-    [Header("Vidas y Balas y runa")]
-    public GameObject vidasPrefab;
-    public GameObject vidas2Prefab;
-    public GameObject balasPrefab;
-    public GameObject runa;
-    public int cantidadBalas;
-    public int cantidadVidas;
-    public int cantidadVidas2;
-    
-    [Header("Par�metros de generaci�n de items")]
-    public float mapRadius = 100f;
-    public LayerMask groundLayer;
-
     [Header("Nav mesh surface")]
     public NavMeshSurface navMeshSurface;
+
+
+    [Header("Objetos del mapa")]
+    public GameObject vidasPrefab;
+    public GameObject balasPrefab;
+    public GameObject runaPrefab;
+
+    [Tooltip("Cuántas vidas spawnean")]
+    public int cantidadVidas = 5;
+    [Tooltip("Cuántas balas spawnean")]
+    public int cantidadBalas = 5;
+    [Tooltip("Radio desde el centro para colocar pickups")]
+    public float mapRadius = 100f;
+
+    [Tooltip("Layer donde está el suelo")]
+    public LayerMask groundLayer;
+
+    [Tooltip("Objetos sobre los que no deben aparecer pickups")]
+    public LayerMask blockedLayer;
     void Start()
     {
         SelectUniquePositions();
@@ -63,32 +69,122 @@ public class FarmGenerator : MonoBehaviour
         // Construir el NavMesh
         navMeshSurface.BuildNavMesh();
 
-        // Esperar hasta que el NavMesh est� listo
+        // Esperar hasta que el NavMesh esté listo
         yield return new WaitUntil(() => navMeshSurface.navMeshData != null);
 
-        // Esperar un frame adicional para asegurar que todo est� inicializado
+        // Esperar un frame adicional para asegurar que todo está inicializado
         yield return null;
 
         // Activar todos los spawners
         ActivateAllSpawners();
 
-        // Esperar un frame adicional para asegurar que todo est� inicializado
-        yield return null;
-
-        SpawnItems(vidasPrefab, cantidadVidas); 
-        
-        yield return null;
-
-        SpawnItems(vidas2Prefab, cantidadVidas2);
-
+        // Spawnear ítems del mapa (vidas, balas y la runa)
+        SpawnItems(vidasPrefab, cantidadVidas);
         yield return null;
 
         SpawnItems(balasPrefab, cantidadBalas);
-
         yield return null;
 
-        SpawnItems(runa, 1);
+        // Runa especial: solo una vez
+        SpawnRunaSegura();
     }
+    //nuevo
+    void SpawnItems(GameObject prefab, int cantidad)
+    {
+        for (int i = 0; i < cantidad; i++)
+        {
+            Vector3 spawnPos = GetRandomNavMeshPosition();
+            Instantiate(prefab, spawnPos, Quaternion.identity);
+        }
+    }
+
+    void SpawnRunaSegura()
+    {
+        Vector3 spawnPos = GetRandomNavMeshPosition();
+        if (spawnPos != Vector3.zero)
+        {
+            Instantiate(runaPrefab, spawnPos, Quaternion.identity);
+            Debug.Log($"✅ Runa instanciada en {spawnPos}");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ No se encontró una posición válida para la runa.");
+        }
+    }
+
+    //Vector3 GetRandomNavMeshPosition()
+    //{
+    //    const float verticalOffset = 0.3f; // Subida inicial para que no atraviese el suelo
+    //    int maxTries = 30;
+
+    //    for (int tries = 0; tries < maxTries; tries++)
+    //    {
+    //        float safeMargin = 2f; // Evita extremos del mapa
+    //        float safeMinX = tileSize * safeMargin;
+    //        float safeMaxX = tileSize * (gridSize - safeMargin);
+    //        float safeMinZ = tileSize * safeMargin;
+    //        float safeMaxZ = tileSize * (gridSize - safeMargin);
+
+    //        float randomX = Random.Range(safeMinX, safeMaxX);
+    //        float randomZ = Random.Range(safeMinZ, safeMaxZ);
+
+    //        Vector3 probe = new Vector3(randomX, 50f, randomZ);
+
+    //        if (Physics.Raycast(probe, Vector3.down, out RaycastHit hit, 100f, groundLayer))
+    //        {
+    //            if (NavMesh.SamplePosition(hit.point, out NavMeshHit nav, 1.5f, NavMesh.AllAreas))
+    //            {
+    //                Vector3 finalPos = nav.position + Vector3.up * verticalOffset;
+    //                return finalPos;
+    //            }
+    //        }
+    //    }
+
+    //    Debug.LogWarning("⚠️ No se encontró posición segura sobre el mapa.");
+    //    return Vector3.zero;
+    //}
+    Vector3 GetRandomNavMeshPosition()
+    {
+        const float verticalOffset = 0.3f;
+        int maxTries = 30;
+
+        for (int tries = 0; tries < maxTries; tries++)
+        {
+            float safeMargin = 2f;
+            float safeMinX = tileSize * safeMargin;
+            float safeMaxX = tileSize * (gridSize - safeMargin);
+            float safeMinZ = tileSize * safeMargin;
+            float safeMaxZ = tileSize * (gridSize - safeMargin);
+
+            float randomX = Random.Range(safeMinX, safeMaxX);
+            float randomZ = Random.Range(safeMinZ, safeMaxZ);
+
+            Vector3 probe = new Vector3(randomX, 50f, randomZ);
+
+            if (Physics.Raycast(probe, Vector3.down, out RaycastHit hit, 100f, groundLayer))
+            {
+                if (NavMesh.SamplePosition(hit.point, out NavMeshHit nav, 1.5f, NavMesh.AllAreas))
+                {
+                    Vector3 finalPos = nav.position + Vector3.up * verticalOffset;
+
+                    // ✅ Check para evitar zonas bloqueadas
+                    if (Physics.CheckSphere(finalPos, 0.5f, blockedLayer))
+                    {
+                        continue; // Estaba dentro de un edificio inaccesible
+                    }
+
+                    return finalPos;
+                }
+            }
+        }
+
+        Debug.LogWarning("⚠️ No se encontró posición segura sobre el mapa.");
+        return Vector3.zero;
+    }
+
+
+
+    //fin nuevo
     void ActivateAllSpawners()
     {
         // Buscar todos los ZombieSpawners en la escena
@@ -103,11 +199,11 @@ public class FarmGenerator : MonoBehaviour
     }
     void SelectUniquePositions()
     {
-        int bordeMin = 1; // Qu� tan lejos del borde
-        int distanciaMinima = 3; // Distancia m�nima entre edificios
+        int bordeMin = 1; // Qué tan lejos del borde
+        int distanciaMinima = 3; // Distancia mínima entre edificios
         List<Vector2Int> candidatas = new List<Vector2Int>();
 
-        // Generar todas las posiciones v�lidas (alejadas del borde)
+        // Generar todas las posiciones válidas (alejadas del borde)
         for (int x = bordeMin; x < gridSize - bordeMin; x++)
         {
             for (int z = bordeMin; z < gridSize - bordeMin; z++)
@@ -212,8 +308,8 @@ public class FarmGenerator : MonoBehaviour
             Vector3 posSur = new Vector3(x * tileSize, 0, -tileSize);
             Vector3 posNorte = new Vector3(x * tileSize, 0, gridSize * tileSize);
 
-            GameObject prefabSur = (lado == 0 && x == puertaIndex) ? salidaPrefab : limitePrefab;
-            GameObject prefabNorte = (lado == 2 && x == puertaIndex) ? salidaPrefab : limitePrefab;
+            GameObject prefabSur = (lado == 0 && x == puertaIndex) ? gatePrefab : fencePrefab;
+            GameObject prefabNorte = (lado == 2 && x == puertaIndex) ? gatePrefab : fencePrefab;
 
             Instantiate(prefabSur, posSur, Quaternion.identity, transform);
             Instantiate(prefabNorte, posNorte, Quaternion.Euler(0, 180, 0), transform);
@@ -224,50 +320,32 @@ public class FarmGenerator : MonoBehaviour
             Vector3 posOeste = new Vector3(-tileSize, 0, z * tileSize);
             Vector3 posEste = new Vector3(gridSize * tileSize, 0, z * tileSize);
 
-            GameObject prefabOeste = (lado == 3 && z == puertaIndex) ? salidaPrefab : limitePrefab;
-            GameObject prefabEste = (lado == 1 && z == puertaIndex) ? salidaPrefab : limitePrefab;
+            GameObject prefabOeste = (lado == 3 && z == puertaIndex) ? gatePrefab : fencePrefab;
+            GameObject prefabEste = (lado == 1 && z == puertaIndex) ? gatePrefab : fencePrefab;
 
             Quaternion rot = Quaternion.Euler(0, 90, 0);
             Instantiate(prefabOeste, posOeste, rot, transform);
             Instantiate(prefabEste, posEste, rot, transform);
         }
-        
         PlaceFenceCorners();
     }
-    private void SpawnItems(GameObject item, int cantidad)
-    {
-        for (int i = 0; i < cantidad; i++)
-        {
-            Vector3 spawnPos = GetRandomNavMeshPosition();
-            Instantiate(item, spawnPos, Quaternion.identity);
-        }
-    }
-    private Vector3 GetRandomNavMeshPosition()
-    {
-        for (int tries = 0; tries < 10; tries++)
-        {
-            Vector3 randomPos = transform.position + Random.insideUnitSphere * mapRadius;
-            if (Physics.Raycast(randomPos + Vector3.up * 50, Vector3.down, out var hit, 100f, groundLayer))
-            {
-                if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 1f, NavMesh.AllAreas))
-                    return navHit.position;
-            }
-        }
-
-        return transform.position; // fallback
-    }
-
     void PlaceFenceCorners()
     {
-        Vector3 esquinaSO = new Vector3(-tileSize, 0, -tileSize);
-        Vector3 esquinaSE = new Vector3(gridSize * tileSize, 0, -tileSize);
-        Vector3 esquinaNO = new Vector3(-tileSize, 0, gridSize * tileSize);
-        Vector3 esquinaNE = new Vector3(gridSize * tileSize, 0, gridSize * tileSize);
+        float s = tileSize;
+        float max = gridSize * s;
 
+        // Posiciones de esquina
+        Vector3 esquinaSO = new Vector3(-s, 0, -s);
+        Vector3 esquinaSE = new Vector3(max, 0, -s);
+        Vector3 esquinaNO = new Vector3(-s, 0, max);
+        Vector3 esquinaNE = new Vector3(max, 0, max);
+
+        // Instanciamos cada esquina con su rotación correspondiente
         Instantiate(cornerPrefab, esquinaSO, Quaternion.Euler(0, 180, 0), transform);
         Instantiate(cornerPrefab, esquinaSE, Quaternion.Euler(0, 90, 0), transform);
         Instantiate(cornerPrefab, esquinaNO, Quaternion.Euler(0, 270, 0), transform);
-        Instantiate(cornerPrefab, esquinaNE, Quaternion.Euler(0, 0, 0), transform);
+        Instantiate(cornerPrefab, esquinaNE, Quaternion.identity, transform);
     }
+
 }
 
