@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
         SaveData();
     }
 
-    private void OnSceneLoaded()
+    public void OnSceneLoaded()
     {
         StartCoroutine(UpdateHUDNextFrame());
        
@@ -225,5 +225,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Perder()
+    {
+        if (juegoTerminado) return;
 
+        juegoTerminado = true;
+        Time.timeScale = 0;
+        UIManager.Instance.MostrarDerrota();
+    }
 }

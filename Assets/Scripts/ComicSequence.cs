@@ -90,6 +90,7 @@ public class ComicSequence : MonoBehaviour
         comicImage.gameObject.SetActive(false);
         canvasRoot.gameObject.SetActive(false);
         // GameSceneManager.Instance.LoadSceneByIndex(scene);
+
         GameSceneManager.Instance.LoadNextScene();
     }
    

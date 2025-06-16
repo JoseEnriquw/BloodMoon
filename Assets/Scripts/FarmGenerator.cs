@@ -60,6 +60,9 @@ public class FarmGenerator : MonoBehaviour
         PlaceFences();
 
         StartCoroutine(GenerateFarmRoutine());
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnSceneLoaded();
     }
 
     HashSet<Vector2Int> reservedPositions = new HashSet<Vector2Int>();

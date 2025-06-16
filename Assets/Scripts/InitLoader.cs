@@ -13,8 +13,7 @@ public class InitLoader : MonoBehaviour
     private ComicSequence comicSequence;
     public static event Action Inicio;
     private void Start()
-    {
-        
+    {        
         Inicio?.Invoke();
         comicSequence = FindObjectOfType<ComicSequence>();
         comicSequence.StartComicSequence("inicio");
