@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.012245246, g: 0.030009747, b: 0.043723065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -488,7 +488,7 @@ MonoBehaviour:
     type: 3}
   balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
     type: 3}
-  runaPrefab: {fileID: 5047770990850621904, guid: b4d3e125ce0aa38468f7f54f41148ab6,
+  runaPrefab: {fileID: 5047770990850621904, guid: 0885db413762b8f4ca3438de388b2917,
     type: 3}
   cantidadVidas: 5
   cantidadBalas: 5

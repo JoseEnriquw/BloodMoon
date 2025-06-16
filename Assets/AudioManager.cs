@@ -16,7 +16,9 @@ public class AudioManager : MonoBehaviour
     }
     public void SetVolumenGeneral(float valor)
     {
+        Debug.Log("Nuevo volumen: " + valor);
         audioMixer.SetFloat("VolumenGeneral", Mathf.Log10(valor) * 20);
+        Debug.Log("Nuevo volumen: " + valor + "hola");
     }
 
     public void SetVolumenMusica(float valor)
