@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
+using UnityEngine.SceneManagement;
 
 public class FarmGenerator : MonoBehaviour
 {
@@ -33,7 +34,6 @@ public class FarmGenerator : MonoBehaviour
     [Header("Nav mesh surface")]
     public NavMeshSurface navMeshSurface;
 
-
     [Header("Objetos del mapa")]
     public GameObject vidasPrefab;
     public GameObject balasPrefab;
@@ -60,6 +60,9 @@ public class FarmGenerator : MonoBehaviour
         PlaceFences();
 
         StartCoroutine(GenerateFarmRoutine());
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnSceneLoaded();
     }
 
     HashSet<Vector2Int> reservedPositions = new HashSet<Vector2Int>();
@@ -100,6 +103,13 @@ public class FarmGenerator : MonoBehaviour
 
     void SpawnRunaSegura()
     {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (GameManager.gameManager.HasRuneForLevel(sceneIndex))
+        {
+            Debug.Log("✅ Runa ya recolectada en este nivel. No se genera.");
+            return;
+        }
         Vector3 spawnPos = GetRandomNavMeshPosition();
         if (spawnPos != Vector3.zero)
         {

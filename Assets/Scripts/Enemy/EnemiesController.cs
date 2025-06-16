@@ -203,14 +203,7 @@
 //        Invoke(nameof(ResetAttack), timeBetweenAttks);
 //        alreadyAttacked = true;
 //    }
-//    void ApplyDamage()            
-//    {
-//        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
-//        {
-//            var hp = player.GetComponent<PlayerHealth>();
-//            if (hp) hp.ReciveDamage(attackDamage);
-//        }
-//    }
+
 //    void CancelAttack()
 //    {
 //        animator.ResetTrigger("IsAttacking");
@@ -413,7 +406,6 @@ public class EnemiesController : MonoBehaviour
             audioSrc.PlayOneShot(walkClip);
         }
     }
-
     void OnTriggerStay(Collider other)
     {
         if (health.isDead || !other.CompareTag("Player")) return;
@@ -531,5 +523,13 @@ public class EnemiesController : MonoBehaviour
         }
     }
 
+    void ApplyDamage()
+    {
+        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            var hp = player.GetComponent<PlayerHealth>();
+            if (hp) hp.ReciveDamage(attackDamage);
+        }
+    }
 }
 

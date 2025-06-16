@@ -168,7 +168,6 @@ public class ZombieSpawner : MonoBehaviour
         {
             Vector2 offset = Random.insideUnitCircle * radius;
             Vector3 probe = new Vector3(center.x + offset.x, center.y + 5, center.z + offset.y);
-
             if (Physics.Raycast(probe, Vector3.down, out RaycastHit hit, 10f, groundLayer))
             {
                 if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 1.5f, NavMesh.AllAreas))

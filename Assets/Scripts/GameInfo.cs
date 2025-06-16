@@ -11,6 +11,7 @@ public class GameInfo
     public float Health;
     public int Bullets;
     public int Runes;
-    public string LastScene;
-    //  public Vector3 LastPosition;
+    public int LastSceneIndex;
+
+    public List<int> LevelsWithRune = new List<int>();
 }
