@@ -322,6 +322,7 @@ MonoBehaviour:
   detectionRange: 10
   attackRange: 2
   timeBetweenAttks: 1
+  attackDamage: 10
   walkClip: {fileID: 0}
   hitClip: {fileID: 0}
   walkClipCooldown: 0.7
@@ -511,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: 50
+  _damage: 0
 --- !u!1 &299297189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,9 +1748,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hordes:
   - zombiePrefab: {fileID: 71199259}
-    numberToSpawn: 1
+    numberToSpawn: 3
   - zombiePrefab: {fileID: 609551522}
-    numberToSpawn: 1
+    numberToSpawn: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2773,6 +2775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: 5
+  _damage: 0
 --- !u!1 &1937889338
 GameObject:
   m_ObjectHideFlags: 0
