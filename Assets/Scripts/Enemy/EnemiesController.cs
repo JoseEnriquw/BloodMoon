@@ -532,13 +532,6 @@ public class EnemiesController : MonoBehaviour
         }
     }
 
-    void ApplyDamage()
-    {
-        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
-        {
-            var hp = player.GetComponent<PlayerHealth>();
-            if (hp) hp.ReciveDamage(attackDamage);
-        }
-    }
+    
 }
 
