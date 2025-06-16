@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -11,8 +12,11 @@ public class RuinManager : MonoBehaviour , ICollectible
     private bool _hasAll=false;
     public static event Action OnAllRunesCollected;
     public void Collect(PlayerData playerData)
-    {
+    {  
+
         playerData.Runes += _value;
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        GameManager.gameManager.MarkRuneAsCollected(sceneIndex);
         if (playerData.Runes >= 3 && !_hasAll)
         {
             _hasAll = true;

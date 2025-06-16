@@ -12,8 +12,7 @@ public class FinalBoss : MonoBehaviour
     private void Start()
     {
         portal.SetActive(false);
-        RuinManager.OnAllRunesCollected += ActivatePortal;
-        
+        RuinManager.OnAllRunesCollected += ActivatePortal;        
     }
 
     private void OnDestroy()
@@ -36,6 +35,7 @@ public class FinalBoss : MonoBehaviour
             Debug.Log("🎬 Entrando al portal. Iniciando historia final...");
             if (ComicSequence.Instance != null)
             {
+                portalActivated?.Invoke();
                 ComicSequence.Instance.StartComicSequence("final");
             }
             else

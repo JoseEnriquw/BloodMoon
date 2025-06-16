@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePausa();
+           // TogglePausa();
         }
     }
     
@@ -42,11 +42,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHUD(float health, int bullets, int ruins)
     {
+        if (!hud.activeSelf)
+            hud.SetActive(true);
+
         if (healthText != null) healthText.text = health.ToString();
         if (bulletsText != null) bulletsText.text = bullets.ToString();
         if (ruinsText != null) ruinsText.text = ruins.ToString();
         if (ruins == 1) 
-            {
+        {
             runa1.gameObject.SetActive(true);
         }
         if (ruins == 2)
@@ -59,14 +62,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void TogglePausa()
-    {
-        juegoPausado = !juegoPausado;
-        panelPausa.SetActive(juegoPausado);
-        hud.SetActive(!juegoPausado);
+    //public void TogglePausa()
+    //{
+    //    juegoPausado = !juegoPausado;
+    //    panelPausa.SetActive(juegoPausado);
+    //    hud.SetActive(!juegoPausado);
 
-        Time.timeScale = juegoPausado ? 0 : 1;
-    }
+    //    Time.timeScale = juegoPausado ? 0 : 1;
+    //}
     public void MostrarVictoria()
     {
         Time.timeScale = 0;
@@ -90,4 +93,10 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(duracion);
         cartel.SetActive(false);
     }
+
+    public bool IsHudActive()
+    {
+        return hud != null && hud.activeSelf;
+    }
+
 }

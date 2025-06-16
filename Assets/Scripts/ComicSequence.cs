@@ -43,11 +43,13 @@ public class ComicSequence : MonoBehaviour
     }
     private void Activate()
     {
+        if(!canvasRoot.gameObject.activeSelf)
+            canvasRoot.gameObject.SetActive (true);
         if (!comicImage.gameObject.activeSelf)
         {
             comicImage.gameObject.SetActive(true);
             
-        }
+        } 
     }
     public void StartComicSequence(string secuence)
     {
@@ -72,11 +74,11 @@ public class ComicSequence : MonoBehaviour
         else
             Debug.LogError("❌ Falta asignar comicImage o canvasRoot.");
     }
-    //private IEnumerator PlayComicCoroutine(string[] imageList)
+   
     private IEnumerator PlayComicCoroutine(List<Sprite> sequence, int scene)
     {
         
-       // canvasRoot.gameObject.SetActive(true);
+        canvasRoot.gameObject.SetActive(true);
         comicImage.gameObject.SetActive(true);
 
         foreach (Sprite sprite in sequence)
@@ -85,11 +87,11 @@ public class ComicSequence : MonoBehaviour
             yield return new WaitForSeconds(imageDuration);
         }
 
-      
-        // Ocultar canvas y cargar siguiente escena
-       // canvasRoot.gameObject.SetActive(false);
         comicImage.gameObject.SetActive(false);
-        GameSceneManager.Instance.LoadSceneByIndex(scene);
+        canvasRoot.gameObject.SetActive(false);
+        // GameSceneManager.Instance.LoadSceneByIndex(scene);
+
+        GameSceneManager.Instance.LoadNextScene();
     }
    
 }
