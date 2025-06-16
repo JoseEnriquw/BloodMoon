@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     float _healthTemp= 0f;
     int _bulletTemp= 0;
     int _ruinsTemp= 0;
+    bool juegoTerminado = false;
+
+    public static GameManager Instance { get; private set; }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,6 +38,11 @@ public class GameManager : MonoBehaviour
 
         gameManager = this;
         DontDestroyOnLoad(this.gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            
+        }
 
     }
     void Start()
@@ -75,7 +83,7 @@ public class GameManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
 
             if (gameInfo == null)
-                gameInfo = new GameInfo(); // Solo si todavía no hay uno
+                gameInfo = new GameInfo(); // Solo si todav�a no hay uno
 
             // Actualizamos el objeto existente
             gameInfo.Health = playerData.Health;
@@ -154,12 +162,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("El archivo existe pero está vacío.");
+                Debug.LogWarning("El archivo existe pero est� vac�o.");
             }
         }
         else
         {
-            Debug.Log("No se encontró el archivo de guardado.");
+            Debug.Log("No se encontr� el archivo de guardado.");
         }
     }
 
