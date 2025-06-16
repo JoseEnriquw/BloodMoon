@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.012245246, g: 0.030009747, b: 0.043723065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -484,18 +484,21 @@ MonoBehaviour:
     type: 3}
   colocarPuerta: 1
   navMeshSurface: {fileID: 1650919204}
-  vidasPrefab: {fileID: 0}
-  balasPrefab: {fileID: 0}
-  runaPrefab: {fileID: 0}
+  vidasPrefab: {fileID: 582445512381467609, guid: e8542fed502c3754996597300ad5427b,
+    type: 3}
+  balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
+    type: 3}
+  runaPrefab: {fileID: 5047770990850621904, guid: 0885db413762b8f4ca3438de388b2917,
+    type: 3}
   cantidadVidas: 5
   cantidadBalas: 5
   mapRadius: 100
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   blockedLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!114 &1650919204
 MonoBehaviour:
   m_ObjectHideFlags: 0

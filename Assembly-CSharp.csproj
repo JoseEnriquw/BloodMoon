@@ -98,6 +98,7 @@
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\EffectShaderPropertyStr.cs" />
     <Compile Include="Assets\Scripts\InitLoader.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponManager.cs" />
+    <Compile Include="Assets\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
     <Compile Include="Assets\Scripts\ComicSequence.cs" />
@@ -982,10 +983,6 @@
       <Project>{5AB92FF4-2D79-436F-655D-FD4DC635960B}</Project>
       <Name>Unity.Animation.Rigging</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
-      <Project>{31ACD6BF-0E40-8156-F152-5E726CD925B9}</Project>
-      <Name>Unity.Postprocessing.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
       <Project>{C0EA5E43-4C46-FED5-EC21-5836A4D6FBF8}</Project>
       <Name>Unity.RenderPipelines.Core.Runtime</Name>
@@ -994,9 +991,9 @@
       <Project>{A27E7743-FE7A-775B-E4A2-2DFEEB5DCBFE}</Project>
       <Name>Unity.RenderPipelines.Universal.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AI.Navigation.csproj">
-      <Project>{E8EB46DC-DAD4-CDC2-29E3-E51C3ED80D62}</Project>
-      <Name>Unity.AI.Navigation</Name>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
+      <Project>{6B31BF7A-7AAF-D45E-FC2A-D323FA928125}</Project>
+      <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Burst.Editor.csproj">
       <Project>{7E96178A-C8FA-29FD-E3C6-C866B945B9F0}</Project>
@@ -1010,9 +1007,9 @@
       <Project>{27030B8D-ECAE-BD88-3B12-BF17BB593049}</Project>
       <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{6B31BF7A-7AAF-D45E-FC2A-D323FA928125}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
+    <ProjectReference Include="Unity.AI.Navigation.csproj">
+      <Project>{E8EB46DC-DAD4-CDC2-29E3-E51C3ED80D62}</Project>
+      <Name>Unity.AI.Navigation</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
       <Project>{C6F3B61A-4A33-9A69-0639-404EFDA648C1}</Project>
@@ -1117,6 +1114,10 @@
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{B5C63FF4-F65F-6F2D-53E4-F4E74357438D}</Project>
       <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
+      <Project>{31ACD6BF-0E40-8156-F152-5E726CD925B9}</Project>
+      <Name>Unity.Postprocessing.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
       <Project>{F6088048-9154-5218-0665-4BF992951F96}</Project>

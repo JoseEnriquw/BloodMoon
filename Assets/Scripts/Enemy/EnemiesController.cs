@@ -203,14 +203,7 @@
 //        Invoke(nameof(ResetAttack), timeBetweenAttks);
 //        alreadyAttacked = true;
 //    }
-//    void ApplyDamage()            
-//    {
-//        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
-//        {
-//            var hp = player.GetComponent<PlayerHealth>();
-//            if (hp) hp.ReciveDamage(attackDamage);
-//        }
-//    }
+    
 //    void CancelAttack()
 //    {
 //        animator.ResetTrigger("IsAttacking");
@@ -370,7 +363,7 @@ public class EnemiesController : MonoBehaviour
         if (patrolPoints != null && patrolPoints.Length > 0 && agent.isOnNavMesh)
         {
             agent.SetDestination(patrolPoints[0].position);
-            Debug.Log($"[{name}] SetDestination hacia: {patrolPoints[0].position}");
+            //Debug.Log($"[{name}] SetDestination hacia: {patrolPoints[0].position}");
         }
         else
         {
@@ -528,6 +521,15 @@ public class EnemiesController : MonoBehaviour
             var corners = agent.path.corners;
             for (int i = 0; i < corners.Length - 1; i++)
                 Gizmos.DrawLine(corners[i], corners[i + 1]);
+        }
+    }
+    void ApplyDamage()
+    {
+
+        if (player && Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            var hp = player.GetComponent<PlayerHealth>();
+            if (hp) hp.ReciveDamage(attackDamage);
         }
     }
 
