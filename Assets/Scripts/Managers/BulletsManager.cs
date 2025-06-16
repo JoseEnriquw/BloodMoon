@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletsManager : MonoBehaviour, ICollectible
 {
     [SerializeField] int _value;
+    [SerializeField] int _damage;
     public void Collect(PlayerData playerData)
     {
         playerData.Bullets += _value;
@@ -15,7 +16,7 @@ public class BulletsManager : MonoBehaviour, ICollectible
         {
             if (other.TryGetComponent<EnemyHealth>(out var healthcomponent))
             {
-                healthcomponent.ReciveDamage(_value);
+                healthcomponent.ReciveDamage(_damage);
             }
         }
     }

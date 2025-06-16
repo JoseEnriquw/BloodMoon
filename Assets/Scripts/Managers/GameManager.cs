@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     float _healthTemp= 0f;
     int _bulletTemp= 0;
     int _ruinsTemp= 0;
+    bool juegoTerminado = false;
+
+    public static GameManager Instance { get; private set; }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,6 +38,11 @@ public class GameManager : MonoBehaviour
 
         gameManager = this;
         DontDestroyOnLoad(this.gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            
+        }
 
     }
     void Start()
@@ -164,5 +172,13 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance?.UpdateHUD(playerData.Health, playerData.Bullets, playerData.Runes);
+    }
+    public void Perder()
+    {
+        if (juegoTerminado) return;
+
+        juegoTerminado = true;
+        Time.timeScale = 0;
+        UIManager.Instance.MostrarDerrota();
     }
 }
