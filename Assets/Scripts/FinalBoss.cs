@@ -12,8 +12,7 @@ public class FinalBoss : MonoBehaviour
     private void Start()
     {
         portal.SetActive(false);
-        RuinManager.OnAllRunesCollected += ActivatePortal;
-        
+        RuinManager.OnAllRunesCollected += ActivatePortal;        
     }
 
     private void OnDestroy()

@@ -33,7 +33,6 @@ public class FarmGenerator : MonoBehaviour
     [Header("Nav mesh surface")]
     public NavMeshSurface navMeshSurface;
 
-
     [Header("Objetos del mapa")]
     public GameObject vidasPrefab;
     public GameObject balasPrefab;

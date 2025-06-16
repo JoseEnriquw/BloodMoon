@@ -413,7 +413,6 @@ public class EnemiesController : MonoBehaviour
             audioSrc.PlayOneShot(walkClip);
         }
     }
-
     void OnTriggerStay(Collider other)
     {
         if (health.isDead || !other.CompareTag("Player")) return;
