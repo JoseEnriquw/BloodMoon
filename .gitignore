@@ -71,3 +71,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /.github/copilot-instructions.md
+/Assets/ithappy/Animals_FREE/Render_Pipeline_Convert/URP_to_BuiltIn_source.unitypackage.meta
+/Assets/ithappy/Animals_FREE/Render_Pipeline_Convert/URP_to_HDRP_source.unitypackage.meta
