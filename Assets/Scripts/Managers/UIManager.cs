@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-           // TogglePausa();
+            TogglePausa();
         }
     }
     
@@ -62,14 +62,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //public void TogglePausa()
-    //{
-    //    juegoPausado = !juegoPausado;
-    //    panelPausa.SetActive(juegoPausado);
-    //    hud.SetActive(!juegoPausado);
+    public void TogglePausa()
+    {
+        juegoPausado = !juegoPausado;
+        panelPausa.SetActive(juegoPausado);
+        hud.SetActive(!juegoPausado);
 
-    //    Time.timeScale = juegoPausado ? 0 : 1;
-    //}
+        Time.timeScale = juegoPausado ? 0 : 1;
+    }
+    public void ReanudarJuego()
+    {
+        juegoPausado = !juegoPausado;
+        panelPausa.SetActive(juegoPausado);
+        hud.SetActive(!juegoPausado);
+        Time.timeScale = juegoPausado ? 0 : 1;
+    }
     public void MostrarVictoria()
     {
         Time.timeScale = 0;
@@ -80,6 +87,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         hud.SetActive(false);
+        InteractionUIManager.Instance.HideInteraction();
         panelDerrota.SetActive(true);
     }
     public void FaltaRuna()

@@ -8,7 +8,10 @@ public class BulletsManager : MonoBehaviour, ICollectible
     {
         playerData.Bullets += _value;
     }
-
+    public void Rest(PlayerData playerData)
+    {
+        playerData.Bullets -= _value;
+    }
     //BALA HACE DAÒO AL enemigo
     private void OnTriggerEnter(Collider other)
     {
@@ -19,5 +22,6 @@ public class BulletsManager : MonoBehaviour, ICollectible
                 healthcomponent.ReciveDamage(_damage);
             }
         }
+        
     }
 }
