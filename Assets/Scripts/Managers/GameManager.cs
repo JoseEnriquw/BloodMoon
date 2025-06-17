@@ -10,11 +10,7 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager;
-    //[SerializeField] TextMeshProUGUI health;
-    //[SerializeField] TextMeshProUGUI bullets;
-    //[SerializeField] TextMeshProUGUI ruins;
-   // private bool ExecutedCoroutine;
+    public static GameManager gameManager;  
     [SerializeField] PlayerData playerData;
     GameInfo gameInfo;
     private string savePath;
@@ -83,28 +79,20 @@ public class GameManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
 
             if (gameInfo == null)
-                gameInfo = new GameInfo(); // Solo si todav�a no hay uno
+                gameInfo = new GameInfo(); 
 
-            // Actualizamos el objeto existente
+            
             gameInfo.Health = playerData.Health;
             gameInfo.Bullets = playerData.Bullets;
             gameInfo.Runes = playerData.Runes;
             gameInfo.LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex;
 
-            // Asegurar que LevelsWithRune no sea null
+           
             if (gameInfo.LevelsWithRune == null)
                 gameInfo.LevelsWithRune = new List<int>();
 
             using (FileStream fileStream = File.Create(path))
-            {
-                //GameInfo gameInfo = new GameInfo
-                //{
-                //    Health = playerData.Health,
-                //    Bullets = playerData.Bullets,
-                //    Runes = playerData.Runes,
-                //    LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex
-                   
-                // };
+            {               
 
                 bf.Serialize(fileStream, gameInfo);
                 
@@ -221,7 +209,7 @@ public class GameManager : MonoBehaviour
         if (!gameInfo.LevelsWithRune.Contains(sceneIndex))
         {
             gameInfo.LevelsWithRune.Add(sceneIndex);
-            SaveData(); // Ahora guarda con los cambios actualizados
+            SaveData(); 
         }
     }
 

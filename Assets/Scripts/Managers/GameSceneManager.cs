@@ -10,7 +10,7 @@ public class GameSceneManager : MonoBehaviour
     [Header("Pantalla de carga")]
     [SerializeField] GameObject loadingPanel;
     [SerializeField] Image sceneImage;
-    [SerializeField] Sprite nivel1, nivel2, nivel3;
+    [SerializeField] Sprite nivel1, nivel2, nivel3, nivel4;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -57,7 +57,7 @@ public class GameSceneManager : MonoBehaviour
         {
             StopMusic();
             LoadSceneWithImage(nextIndex);
-            //SceneManager.LoadScene(nextIndex);
+            
         }
         else
         {
@@ -92,14 +92,17 @@ public class GameSceneManager : MonoBehaviour
         loadingPanel.SetActive(true);
         switch (sceneIndex)
         {
-            case 1:
+            case 2:
                 sceneImage.sprite = nivel1;
                 break;
-            case 2:
+            case 3:
                 sceneImage.sprite = nivel2;
                 break;
-            case 3:
+            case 4:
                 sceneImage.sprite = nivel3;
+                break;
+            case 5:
+                sceneImage.sprite = nivel4;
                 break;
 
         }       

@@ -80,8 +80,13 @@ public class UIManager : MonoBehaviour
     public void MostrarVictoria()
     {
         Time.timeScale = 0;
-        hud.SetActive(false);
+        hud.SetActive(false);       
         panelVictoria.SetActive(true);
+    }
+    public void BactoMenu()
+    {
+        panelVictoria.SetActive(false);
+        GameSceneManager.Instance.LoadSceneByIndex(0);
     }
     public void MostrarDerrota()
     {
@@ -89,6 +94,8 @@ public class UIManager : MonoBehaviour
         hud.SetActive(false);
         InteractionUIManager.Instance.HideInteraction();
         panelDerrota.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void FaltaRuna()
     {
@@ -105,6 +112,13 @@ public class UIManager : MonoBehaviour
     public bool IsHudActive()
     {
         return hud != null && hud.activeSelf;
+    }
+    public void ReintentarPartida()
+    {
+        panelDerrota.SetActive(false); // ocultar el panel de derrota
+        Time.timeScale = 1f; // asegurar que el juego siga
+
+        GameManager.gameManager.LoadData(); // cargar partida
     }
 
 }

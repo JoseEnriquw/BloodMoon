@@ -194,9 +194,9 @@ MonoBehaviour:
     type: 3}
   colocarPuerta: 0
   navMeshSurface: {fileID: 763417385}
-  vidasPrefab: {fileID: 582445512381467609, guid: e8542fed502c3754996597300ad5427b,
+  vidasPrefab: {fileID: 3411713001569538750, guid: c39faac7bf9b1d546bd20eaed20703e4,
     type: 3}
-  balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
+  balasPrefab: {fileID: 7243112760996204813, guid: 7ffea2d0057b03e408ca5d7182620151,
     type: 3}
   runaPrefab: {fileID: 5047770990850621904, guid: b4d3e125ce0aa38468f7f54f41148ab6,
     type: 3}
