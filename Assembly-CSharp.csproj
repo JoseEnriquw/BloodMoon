@@ -70,9 +70,11 @@
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\EffectDemo.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\CementeryRuneActivator.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Victory.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\TransformExtension.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyControllerCoward.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerSounds.cs" />
     <Compile Include="Assets\AudioManager.cs" />
   </ItemGroup>
@@ -125,7 +128,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Models\Military\StarterAssets\license.txt" />
     <None Include="Assets\ZombiePck\Zombie Cartoon\Readme.txt" />
-    <None Include="Assets\Horror Ambient Album - 082318\Notes.txt" />
+    <None Include="Assets\Audio\Horror Ambient Album - 082318\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

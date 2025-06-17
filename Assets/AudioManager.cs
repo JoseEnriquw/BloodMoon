@@ -16,18 +16,24 @@ public class AudioManager : MonoBehaviour
     }
     public void SetVolumenGeneral(float valor)
     {
-        Debug.Log("Nuevo volumen: " + valor);
-        audioMixer.SetFloat("VolumenGeneral", Mathf.Log10(valor) * 20);
-        Debug.Log("Nuevo volumen: " + valor + "hola");
+        audioMixer.SetFloat("Volumen", valor);
+        audioMixer.SetFloat("VolumenMusica", valor);
+        audioMixer.SetFloat("VolumenSFX", valor);
     }
 
     public void SetVolumenMusica(float valor)
     {
-        audioMixer.SetFloat("VolumenMusica", Mathf.Log10(valor) * 20);
+        audioMixer.SetFloat("VolumenMusica", valor);
     }
 
     public void SetVolumenSFX(float valor)
     {
-        audioMixer.SetFloat("VolumenSFX", Mathf.Log10(valor) * 20);
+        audioMixer.SetFloat("VolumenSFX", valor);
     }
+
+    public void StopMusic()
+    {
+        GetComponent<AudioSource>()?.Stop();
+    }
+
 }

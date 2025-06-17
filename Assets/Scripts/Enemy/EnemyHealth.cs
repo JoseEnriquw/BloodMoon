@@ -36,6 +36,11 @@ public class EnemyHealth : MonoBehaviour
             animator.ResetTrigger("IsAttacking");
             animator.SetBool("IsDead ", true);
             audioSource.PlayOneShot(deathSound);
+            var controller = GetComponent<EnemiesController>();
+            if (controller != null)
+            {
+                controller.OnMuere();
+            }
             if (TryGetComponent<NavMeshAgent>(out var nav))
             {
                 nav.isStopped = true;

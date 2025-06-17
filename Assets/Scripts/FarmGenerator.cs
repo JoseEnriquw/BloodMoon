@@ -51,6 +51,13 @@ public class FarmGenerator : MonoBehaviour
 
     [Tooltip("Objetos sobre los que no deben aparecer pickups")]
     public LayerMask blockedLayer;
+
+    [Header("Opcional: Ocultar la runa hasta activarla manualmente")]
+    [SerializeField] private bool ocultarRunaHastaRevelar = false;
+    private GameObject instanciaRuna;
+    [Header("Objeto especial opcional")]
+    public GameObject objetoEspecialPrefab;
+
     void Start()
     {
         SelectUniquePositions();
@@ -90,6 +97,13 @@ public class FarmGenerator : MonoBehaviour
 
         // Runa especial: solo una vez
         SpawnRunaSegura();
+
+        if (objetoEspecialPrefab != null)
+        {
+            SpawnObjetoEspecialUnico();
+            yield return null;
+        }
+
     }
     //nuevo
     void SpawnItems(GameObject prefab, int cantidad)
@@ -113,46 +127,49 @@ public class FarmGenerator : MonoBehaviour
         Vector3 spawnPos = GetRandomNavMeshPosition();
         if (spawnPos != Vector3.zero)
         {
-            Instantiate(runaPrefab, spawnPos, Quaternion.identity);
+            instanciaRuna=Instantiate(runaPrefab, spawnPos, Quaternion.identity);
             Debug.Log($"✅ Runa instanciada en {spawnPos}");
+            if (ocultarRunaHastaRevelar)
+            {
+                OcultarRuna();
+            }
         }
         else
         {
             Debug.LogWarning("⚠️ No se encontró una posición válida para la runa.");
         }
     }
+    public void OcultarRuna()
+    {
+        if (instanciaRuna != null)
+        {
+            instanciaRuna.SetActive(false);
+            Debug.Log("👻 Runa oculta hasta que se revele con el objeto especial.");
+        }
+    }
+    public void RevelarRuna()
+    {
+        if (instanciaRuna != null)
+        {
+            instanciaRuna.SetActive(true);
+            Debug.Log("🌟 ¡Runa revelada!");
+        }
+    }
 
-    //Vector3 GetRandomNavMeshPosition()
-    //{
-    //    const float verticalOffset = 0.3f; // Subida inicial para que no atraviese el suelo
-    //    int maxTries = 30;
+    void SpawnObjetoEspecialUnico()
+    {
+        Vector3 spawnPos = GetRandomNavMeshPosition();
+        if (spawnPos != Vector3.zero)
+        {
+            Instantiate(objetoEspecialPrefab, spawnPos, Quaternion.identity);
+            Debug.Log($"🎯 Objeto especial instanciado en {spawnPos}");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ No se encontró una posición válida para el objeto especial.");
+        }
+    }
 
-    //    for (int tries = 0; tries < maxTries; tries++)
-    //    {
-    //        float safeMargin = 2f; // Evita extremos del mapa
-    //        float safeMinX = tileSize * safeMargin;
-    //        float safeMaxX = tileSize * (gridSize - safeMargin);
-    //        float safeMinZ = tileSize * safeMargin;
-    //        float safeMaxZ = tileSize * (gridSize - safeMargin);
-
-    //        float randomX = Random.Range(safeMinX, safeMaxX);
-    //        float randomZ = Random.Range(safeMinZ, safeMaxZ);
-
-    //        Vector3 probe = new Vector3(randomX, 50f, randomZ);
-
-    //        if (Physics.Raycast(probe, Vector3.down, out RaycastHit hit, 100f, groundLayer))
-    //        {
-    //            if (NavMesh.SamplePosition(hit.point, out NavMeshHit nav, 1.5f, NavMesh.AllAreas))
-    //            {
-    //                Vector3 finalPos = nav.position + Vector3.up * verticalOffset;
-    //                return finalPos;
-    //            }
-    //        }
-    //    }
-
-    //    Debug.LogWarning("⚠️ No se encontró posición segura sobre el mapa.");
-    //    return Vector3.zero;
-    //}
     Vector3 GetRandomNavMeshPosition()
     {
         const float verticalOffset = 0.3f;

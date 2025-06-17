@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Referencias UI")]
+    [SerializeField] GameObject mainMenuCanvas;
+    [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject optionsPanel;
+    [SerializeField] GameObject victoryPanel;
+
+    // public AudioMixer audioMixer;
     public void PlayGame()
     {
         GameManager.gameManager.ResetData();
@@ -16,17 +24,32 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenOptions()
     {
+        mainMenuCanvas.SetActive(false);
+        optionsPanel.SetActive(true);
         
     }
 
     public void OpenCredits()
     {
-        
+        mainMenuCanvas.SetActive(false);
+        creditsPanel.SetActive(true);
     }
-
+    public void BacktoMenu()
+    {
+        mainMenuCanvas.SetActive(true);
+        creditsPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+        victoryPanel.SetActive(false);
+    }
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Saliendo del juego...");
     }
+    public void Victory()
+    {
+        GameSceneManager.Instance.LoadSceneByIndex(0);
+    }
+
+   
 }

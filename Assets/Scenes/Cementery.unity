@@ -208,7 +208,10 @@ MonoBehaviour:
     m_Bits: 8
   blockedLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  ocultarRunaHastaRevelar: 1
+  objetoEspecialPrefab: {fileID: 3797038683521929552, guid: 1d3a23e5d3dff084b9922d69abf7c7cf,
+    type: 3}
 --- !u!114 &763417385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,10 +258,7 @@ MonoBehaviour:
   hordes:
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
-    numberToSpawn: 5
-  - zombiePrefab: {fileID: 7646794583474518930, guid: 71ac9f60cd8fef542ab64af8c7b78d4b,
-      type: 3}
-    numberToSpawn: 5
+    numberToSpawn: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
