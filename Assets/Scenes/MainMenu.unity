@@ -1502,9 +1502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 1317316784}
   sceneImage: {fileID: 1423725435}
-  nivel1: {fileID: 21300000, guid: 5e7d07934557c8c49b4bd67f7dad8fed, type: 3}
-  nivel2: {fileID: 21300000, guid: 11e53794b84f73a43af07d79d703347f, type: 3}
-  nivel3: {fileID: 21300000, guid: 383e65eb34a9eab4397d5197102da8b7, type: 3}
+  nivel1: {fileID: 21300000, guid: 9f263434a1d11f34aa5b2daec598c9b4, type: 3}
+  nivel2: {fileID: 21300000, guid: 2cb0f77aaf644b247a6683031f28645b, type: 3}
+  nivel3: {fileID: 21300000, guid: f8e8ddb171be8d74c96bc5276db1e875, type: 3}
 --- !u!1 &486634145
 GameObject:
   m_ObjectHideFlags: 0
