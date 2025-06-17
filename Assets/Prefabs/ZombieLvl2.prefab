@@ -141,6 +141,8 @@ MonoBehaviour:
   deathParticlesPrefab: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4,
     type: 3}
   deathSound: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
+  healthBarPrefab: {fileID: 364705028289825495, guid: e93648221ae101e4f9d71e1b3f7b5354,
+    type: 3}
 --- !u!195 &6164540514119666315
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -330,3 +332,4 @@ MonoBehaviour:
   walkClipCooldown: 2.74
   speed: 0.36
   acceleration: 2
+  esEspecial: 0

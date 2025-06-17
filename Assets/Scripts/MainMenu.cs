@@ -45,14 +45,14 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenOptions()
     {
-        mainMenuCanvas.SetActive(false);
+        //mainMenuCanvas.SetActive(false);
         optionsPanel.SetActive(true);
         
     }
 
     public void OpenCredits()
     {
-        mainMenuCanvas.SetActive(false);
+        //mainMenuCanvas.SetActive(false);
         creditsPanel.SetActive(true);
     }
     public void BacktoMenu()
@@ -62,6 +62,14 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         victoryPanel.SetActive(false);
         defetPanel.SetActive(false);    
+    }
+    public void CerrarConfig()
+    {
+        optionsPanel.SetActive(false);
+    }
+    public void CerrarCreditos()
+    {
+        creditsPanel.SetActive(false);
     }
     public void QuitGame()
     {
@@ -75,6 +83,10 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         victoryPanel.SetActive(false);
         //GameSceneManager.Instance.LoadSceneByIndex(0);
+    }
+    public void print()
+    {
+        Debug.Log("Boton apretado");
     }
 
    
