@@ -70,7 +70,8 @@ public class UIManager : MonoBehaviour
         juegoPausado = !juegoPausado;
         panelPausa.SetActive(juegoPausado);
         hud.SetActive(!juegoPausado);
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = !juegoPausado;
         Time.timeScale = juegoPausado ? 0 : 1;
     }
     public void ReanudarJuego()
@@ -97,8 +98,9 @@ public class UIManager : MonoBehaviour
         hud.SetActive(false);
         InteractionUIManager.Instance.HideInteraction();
         panelDerrota.SetActive(true);
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+       
     }
     public void FaltaRuna()
     {

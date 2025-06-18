@@ -58,7 +58,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -68,7 +68,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1.2729707
-  m_Center: {x: -0.01, y: 2.03, z: 0}
+  m_Center: {x: -0.15, y: 0.73, z: 0}
 --- !u!1001 &4697922774263256106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,12 +85,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 78e8111d3cbd4404fa7d3607ee455431,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78e8111d3cbd4404fa7d3607ee455431,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78e8111d3cbd4404fa7d3607ee455431,
         type: 3}
@@ -182,15 +182,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fb09873443ab1854d8892a2693f70148, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.07
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fb09873443ab1854d8892a2693f70148, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.29
+      value: -1.29
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fb09873443ab1854d8892a2693f70148, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.42
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fb09873443ab1854d8892a2693f70148, type: 3}
       propertyPath: m_LocalRotation.w
