@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
     }
     public void Reiniciarnivel()
     {
-        
+        SaveData();
 
         string path = Application.persistentDataPath + "/GameInfo.dat";
         if (File.Exists(path))
