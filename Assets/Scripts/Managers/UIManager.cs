@@ -57,10 +57,13 @@ public class UIManager : MonoBehaviour
         }
         if (ruins == 2)
         {
+            runa1.gameObject.SetActive(true);
             runa2.gameObject.SetActive(true);
         }
         if (ruins == 3)
         {
+            runa1.gameObject.SetActive(true);
+            runa2.gameObject.SetActive(true);
             runa3.gameObject.SetActive(true);
         }
     }
