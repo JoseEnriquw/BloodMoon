@@ -82,15 +82,15 @@ public class WeaponManager : MonoBehaviour
 
     private void HandleAnimations()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            EquipAnimation();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    EquipAnimation();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsEquiped)
-        {
-            ShootAnimation();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && IsEquiped)
+        //{
+        //    ShootAnimation();
+        //}
     }
 
     void HandleRigging()
@@ -113,18 +113,18 @@ public class WeaponManager : MonoBehaviour
         playerAnimator.SetBool("Shoot", true);
     }
 
-    private void EquipAnimation()
-    {
-        if (IsEquiped)
-        {
-            playerAnimator.SetBool("UsingGun", false);
-        }
-        else
-        {
-            playerAnimator.SetBool("UsingGun", true);
-        }
-        IsEquiped = !IsEquiped;
-    }
+    //private void EquipAnimation()
+    //{
+    //    if (IsEquiped)
+    //    {
+    //        playerAnimator.SetBool("UsingGun", false);
+    //    }
+    //    else
+    //    {
+    //        playerAnimator.SetBool("UsingGun", true);
+    //    }
+    //    IsEquiped = !IsEquiped;
+    //}
 
     #endregion
 

@@ -10,11 +10,7 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager;
-    //[SerializeField] TextMeshProUGUI health;
-    //[SerializeField] TextMeshProUGUI bullets;
-    //[SerializeField] TextMeshProUGUI ruins;
-   // private bool ExecutedCoroutine;
+    public static GameManager gameManager;  
     [SerializeField] PlayerData playerData;
     GameInfo gameInfo;
     private string savePath;
@@ -83,28 +79,20 @@ public class GameManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
 
             if (gameInfo == null)
-                gameInfo = new GameInfo(); // Solo si todav�a no hay uno
+                gameInfo = new GameInfo(); 
 
-            // Actualizamos el objeto existente
+            
             gameInfo.Health = playerData.Health;
             gameInfo.Bullets = playerData.Bullets;
             gameInfo.Runes = playerData.Runes;
             gameInfo.LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex;
 
-            // Asegurar que LevelsWithRune no sea null
+           
             if (gameInfo.LevelsWithRune == null)
                 gameInfo.LevelsWithRune = new List<int>();
 
             using (FileStream fileStream = File.Create(path))
-            {
-                //GameInfo gameInfo = new GameInfo
-                //{
-                //    Health = playerData.Health,
-                //    Bullets = playerData.Bullets,
-                //    Runes = playerData.Runes,
-                //    LastSceneIndex = sceneIndex >= 0 ? sceneIndex : SceneManager.GetActiveScene().buildIndex
-                   
-                // };
+            {               
 
                 bf.Serialize(fileStream, gameInfo);
                 
@@ -221,16 +209,74 @@ public class GameManager : MonoBehaviour
         if (!gameInfo.LevelsWithRune.Contains(sceneIndex))
         {
             gameInfo.LevelsWithRune.Add(sceneIndex);
-            SaveData(); // Ahora guarda con los cambios actualizados
+            SaveData(); 
         }
     }
 
     public void Perder()
     {
         if (juegoTerminado) return;
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         juegoTerminado = true;
+        Debug.Log("hola");
         Time.timeScale = 0;
         UIManager.Instance.MostrarDerrota();
     }
+    public void Reiniciarnivel()
+    {
+        
+
+        string path = Application.persistentDataPath + "/GameInfo.dat";
+        if (File.Exists(path))
+        {
+            Debug.Log(Application.persistentDataPath);
+
+            FileInfo fileInfo = new FileInfo(path);
+            if (fileInfo.Length > 0)
+            {
+                try
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    using (FileStream fileStream = File.Open(path, FileMode.Open))
+                    {
+                        gameInfo = (GameInfo)bf.Deserialize(fileStream);
+                        playerData.Health = 100;
+                        playerData.Bullets = 0;
+                        playerData.Runes = gameInfo.Runes;
+
+                        if (gameInfo.LevelsWithRune == null)
+                            gameInfo.LevelsWithRune = new List<int>();
+                    }
+                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
+                    if (gameInfo.LastSceneIndex != currentIndex)
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    }
+                    else
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(1);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Error al cargar datos: " + e.Message);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("El archivo existe pero est� vac�o.");
+            }
+        }
+        else
+        {
+            Debug.Log("No se encontr� el archivo de guardado.");
+        }
+
+
+    }
+
+    
 }

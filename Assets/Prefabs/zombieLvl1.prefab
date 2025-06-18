@@ -191,11 +191,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
   isDead: 0
   deathParticlesPrefab: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4,
     type: 3}
   deathSound: {fileID: 8300000, guid: 9df77b70cadc8384ca073a95aebc666f, type: 3}
+  healthBarPrefab: {fileID: 364705028289825495, guid: e93648221ae101e4f9d71e1b3f7b5354,
+    type: 3}
 --- !u!195 &1642706088414740868
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -237,7 +239,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6.15
+  m_Radius: 12.81
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2301010427204190098
 Rigidbody:
@@ -275,7 +277,8 @@ AudioSource:
   m_GameObject: {fileID: 466577530232315826}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8773443762143954057, guid: 656f27892fd8bf8448bbfaa597b35d10,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.022
@@ -287,7 +290,7 @@ AudioSource:
   Priority: 213
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.01
+  MaxDistance: 2.2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -379,8 +382,9 @@ MonoBehaviour:
   attackRange: 2
   timeBetweenAttks: 1
   attackDamage: 20
-  walkClip: {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
+  walkClip: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
   hitClip: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
-  walkClipCooldown: 0.03
+  walkClipCooldown: 1.67
   speed: 0.21
   acceleration: 4
+  esEspecial: 0

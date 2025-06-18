@@ -1040,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 101402, guid: 9b9a33251770c1d4cbc07ab1f7494adc, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Damage
       objectReference: {fileID: 0}
     - target: {fileID: 462428, guid: 9b9a33251770c1d4cbc07ab1f7494adc, type: 3}
       propertyPath: m_LocalScale.x
@@ -1094,11 +1094,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6541068, guid: 9b9a33251770c1d4cbc07ab1f7494adc, type: 3}
+      propertyPath: m_Size.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541068, guid: 9b9a33251770c1d4cbc07ab1f7494adc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 101402, guid: 9b9a33251770c1d4cbc07ab1f7494adc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5631613951583991927}
   m_SourcePrefab: {fileID: 100100000, guid: 9b9a33251770c1d4cbc07ab1f7494adc, type: 3}
+--- !u!1 &1354541013405468038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 101402, guid: 9b9a33251770c1d4cbc07ab1f7494adc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1354541013405436316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5631613951583991927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354541013405468038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2497740573f4a9d438e6ef1bcdd6cb1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 5
 --- !u!4 &1354541013405632448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462428, guid: 9b9a33251770c1d4cbc07ab1f7494adc,

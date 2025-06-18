@@ -70,9 +70,12 @@
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\EffectDemo.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\CementeryRuneActivator.cs" />
+    <Compile Include="Assets\ZombieHealthUI.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Victory.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Assets\Scripts\FloatingItem.cs" />
     <Compile Include="Assets\Scripts\ZombieSpawner.cs" />
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\CameraTarget.cs" />
+    <Compile Include="Assets\Scripts\Character\ShootController.cs" />
     <Compile Include="Assets\Scripts\FinalBoss.cs" />
     <Compile Include="Assets\Scripts\GameInfo.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerAttack.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\EffectShaderPropertyStr.cs" />
     <Compile Include="Assets\Scripts\InitLoader.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponManager.cs" />
+    <Compile Include="Assets\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
     <Compile Include="Assets\Scripts\ComicSequence.cs" />
@@ -105,8 +110,10 @@
     <Compile Include="Assets\Scripts\Managers\RuinManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
+    <Compile Include="Assets\Scripts\BulletProjectile.cs" />
     <Compile Include="Assets\Particlecollection_Free samples\Plugins\Effect\Script\TransformExtension.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyControllerCoward.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerSounds.cs" />
     <Compile Include="Assets\AudioManager.cs" />
   </ItemGroup>
@@ -124,7 +131,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Models\Military\StarterAssets\license.txt" />
     <None Include="Assets\ZombiePck\Zombie Cartoon\Readme.txt" />
-    <None Include="Assets\Horror Ambient Album - 082318\Notes.txt" />
+    <None Include="Assets\Audio\Horror Ambient Album - 082318\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -138,6 +145,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Polygonal Particles\Assets\Shaders\GradientBackgroundShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\OccaSoftware\Crosshairs\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -1169,6 +1177,10 @@
     <ProjectReference Include="Unity.StarterAssets.csproj">
       <Project>{146F43BE-382D-4D87-819E-5A24EBE89D34}</Project>
       <Name>Unity.StarterAssets</Name>
+    </ProjectReference>
+    <ProjectReference Include="OccaSoftware.Crosshairs.Editor.csproj">
+      <Project>{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}</Project>
+      <Name>OccaSoftware.Crosshairs.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

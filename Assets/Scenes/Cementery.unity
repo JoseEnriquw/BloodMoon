@@ -194,9 +194,9 @@ MonoBehaviour:
     type: 3}
   colocarPuerta: 0
   navMeshSurface: {fileID: 763417385}
-  vidasPrefab: {fileID: 582445512381467609, guid: e8542fed502c3754996597300ad5427b,
+  vidasPrefab: {fileID: 3411713001569538750, guid: c39faac7bf9b1d546bd20eaed20703e4,
     type: 3}
-  balasPrefab: {fileID: 2603684022889990355, guid: abf8a328b65eb6341a8c94ce1c8182ea,
+  balasPrefab: {fileID: 7243112760996204813, guid: 7ffea2d0057b03e408ca5d7182620151,
     type: 3}
   runaPrefab: {fileID: 5047770990850621904, guid: b4d3e125ce0aa38468f7f54f41148ab6,
     type: 3}
@@ -208,7 +208,10 @@ MonoBehaviour:
     m_Bits: 8
   blockedLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  ocultarRunaHastaRevelar: 1
+  objetoEspecialPrefab: {fileID: 3797038683521929552, guid: 1d3a23e5d3dff084b9922d69abf7c7cf,
+    type: 3}
 --- !u!114 &763417385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,10 +258,7 @@ MonoBehaviour:
   hordes:
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
-    numberToSpawn: 5
-  - zombiePrefab: {fileID: 7646794583474518930, guid: 71ac9f60cd8fef542ab64af8c7b78d4b,
-      type: 3}
-    numberToSpawn: 5
+    numberToSpawn: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

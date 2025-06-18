@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject deathParticlesPrefab;
     [SerializeField] private AudioClip deathSound;
     private AudioSource audioSource;
+
+    [SerializeField] private GameObject healthBarPrefab;
+    private ZombieHealthUI healthBarUI;
     private void Awake()
     {      
         animator = GetComponent<Animator>();
@@ -21,6 +24,14 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {       
         currentHealth = maxHealth;
+
+        if (healthBarPrefab != null)
+        {
+            GameObject bar = Instantiate(healthBarPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+            healthBarUI = bar.GetComponent<ZombieHealthUI>();
+            if (healthBarUI != null)
+                healthBarUI.SetTarget(transform);
+        }
     }
    
     public void ReciveHealth(int health)
@@ -36,6 +47,11 @@ public class EnemyHealth : MonoBehaviour
             animator.ResetTrigger("IsAttacking");
             animator.SetBool("IsDead ", true);
             audioSource.PlayOneShot(deathSound);
+            var controller = GetComponent<EnemiesController>();
+            if (controller != null)
+            {
+                controller.OnMuere();
+            }
             if (TryGetComponent<NavMeshAgent>(out var nav))
             {
                 nav.isStopped = true;
@@ -48,6 +64,9 @@ public class EnemyHealth : MonoBehaviour
     private void SetHealth(int value)
     {
         currentHealth = Mathf.Clamp(value, 0, maxHealth);
+
+        if (healthBarUI != null)
+            healthBarUI.UpdateHealth(currentHealth, maxHealth);
     }  
 
     private IEnumerator DestroyAfterDeath()
@@ -56,9 +75,13 @@ public class EnemyHealth : MonoBehaviour
         if (deathParticlesPrefab != null)
         {
             Instantiate(deathParticlesPrefab, transform.position, Quaternion.identity);
-        }      
-       
+        }
+        if (healthBarUI != null)
+            Destroy(healthBarUI.gameObject);
+
         Destroy(gameObject);
+
+
     }
 
 

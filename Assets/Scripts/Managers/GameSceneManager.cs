@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager Instance { get; private set; }
-
+    [Header("Pantalla de carga")]
+    [SerializeField] GameObject loadingPanel;
+    [SerializeField] Image sceneImage;
+    [SerializeField] Sprite nivel1, nivel2, nivel3, nivel4;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,6 +27,7 @@ public class GameSceneManager : MonoBehaviour
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
         {
+            StopMusic();
             SceneManager.LoadScene(sceneName);
         }
         else
@@ -34,6 +39,7 @@ public class GameSceneManager : MonoBehaviour
     {
         if (sceneIndex >= 0 && sceneIndex < SceneManager.sceneCountInBuildSettings)
         {
+            StopMusic();
             SceneManager.LoadScene(sceneIndex);
         }
         else
@@ -49,7 +55,9 @@ public class GameSceneManager : MonoBehaviour
         int nextIndex = currentIndex + 1;
         if (nextIndex < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(nextIndex);
+            StopMusic();
+            LoadSceneWithImage(nextIndex);
+            
         }
         else
         {
@@ -65,5 +73,56 @@ public class GameSceneManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0); // Asumiendo que MainMenu está primero
+    }
+
+    private void StopMusic()
+    {
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.StopMusic();
+        }
+    }
+    public void LoadSceneWithImage(int sceneIndex)
+    {
+        StartCoroutine(LoadSceneAsync(sceneIndex));
+    }
+    private IEnumerator LoadSceneAsync(int sceneIndex)
+    {
+        loadingPanel.SetActive(true);
+        switch (sceneIndex)
+        {
+            case 2:
+                sceneImage.sprite = nivel1;
+                break;
+            case 3:
+                sceneImage.sprite = nivel2;
+                break;
+            case 4:
+                sceneImage.sprite = nivel3;
+                break;
+            case 5:
+                sceneImage.sprite = nivel4;
+                break;
+
+        }       
+
+        yield return new WaitForSeconds(1f); 
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneIndex);
+        op.allowSceneActivation = false;
+
+        while (!op.isDone)
+        {
+            if (op.progress >= 0.9f)
+            {
+                yield return new WaitForSeconds(1f);
+                op.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
+
+        loadingPanel.SetActive(false);
     }
 }

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private GameObject hud;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI bulletsText;
     [SerializeField] private TextMeshProUGUI ruinsText;
     [SerializeField] private Image runa1;
@@ -24,7 +25,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-           // TogglePausa();
+            TogglePausa();
         }
     }
     
@@ -46,6 +47,8 @@ public class UIManager : MonoBehaviour
             hud.SetActive(true);
 
         if (healthText != null) healthText.text = health.ToString();
+        if (healthSlider != null) healthSlider.value = health;
+
         if (bulletsText != null) bulletsText.text = bullets.ToString();
         if (ruinsText != null) ruinsText.text = ruins.ToString();
         if (ruins == 1) 
@@ -62,25 +65,40 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //public void TogglePausa()
-    //{
-    //    juegoPausado = !juegoPausado;
-    //    panelPausa.SetActive(juegoPausado);
-    //    hud.SetActive(!juegoPausado);
+    public void TogglePausa()
+    {
+        juegoPausado = !juegoPausado;
+        panelPausa.SetActive(juegoPausado);
+        hud.SetActive(!juegoPausado);
 
-    //    Time.timeScale = juegoPausado ? 0 : 1;
-    //}
+        Time.timeScale = juegoPausado ? 0 : 1;
+    }
+    public void ReanudarJuego()
+    {
+        juegoPausado = !juegoPausado;
+        panelPausa.SetActive(juegoPausado);
+        hud.SetActive(!juegoPausado);
+        Time.timeScale = juegoPausado ? 0 : 1;
+    }
     public void MostrarVictoria()
     {
         Time.timeScale = 0;
-        hud.SetActive(false);
+        hud.SetActive(false);       
         panelVictoria.SetActive(true);
+    }
+    public void BactoMenu()
+    {
+        panelVictoria.SetActive(false);
+        GameSceneManager.Instance.LoadSceneByIndex(0);
     }
     public void MostrarDerrota()
     {
         Time.timeScale = 0;
         hud.SetActive(false);
+        InteractionUIManager.Instance.HideInteraction();
         panelDerrota.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void FaltaRuna()
     {
@@ -97,6 +115,22 @@ public class UIManager : MonoBehaviour
     public bool IsHudActive()
     {
         return hud != null && hud.activeSelf;
+    }
+    public void ReintentarPartida()
+    {
+        if (juegoPausado)
+        {
+            TogglePausa();
+        }
+        panelDerrota.SetActive(false); // ocultar el panel de derrota
+        Time.timeScale = 1f; // asegurar que el juego siga
+
+        GameManager.gameManager.Reiniciarnivel(); // cargar partida
+    }
+
+    public void Guardar()
+    {
+        GameManager.gameManager.SaveData();
     }
 
 }
