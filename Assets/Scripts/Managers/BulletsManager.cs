@@ -13,15 +13,15 @@ public class BulletsManager : MonoBehaviour, ICollectible
         playerData.Bullets -= _value;
     }
     //BALA HACE DAÒO AL enemigo
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            if (other.TryGetComponent<EnemyHealth>(out var healthcomponent))
-            {
-                healthcomponent.ReciveDamage(_damage);
-            }
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        if (other.TryGetComponent<EnemyHealth>(out var healthcomponent))
+    //        {
+    //            healthcomponent.ReciveDamage(_damage);
+    //        }
+    //    }
         
-    }
+    //}
 }
