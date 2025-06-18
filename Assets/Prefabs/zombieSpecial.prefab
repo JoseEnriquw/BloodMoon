@@ -196,6 +196,8 @@ MonoBehaviour:
   deathParticlesPrefab: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4,
     type: 3}
   deathSound: {fileID: 8300000, guid: 9df77b70cadc8384ca073a95aebc666f, type: 3}
+  healthBarPrefab: {fileID: 364705028289825495, guid: e93648221ae101e4f9d71e1b3f7b5354,
+    type: 3}
 --- !u!195 &1642706088414740868
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -288,7 +290,7 @@ AudioSource:
   Priority: 213
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 2.2
+  MaxDistance: 1.01
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -46,6 +46,8 @@ public class MainMenu : MonoBehaviour
     public void OpenOptions()
     {
         //mainMenuCanvas.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         optionsPanel.SetActive(true);
         
     }

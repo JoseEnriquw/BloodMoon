@@ -184,7 +184,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 8.46
+  m_Radius: 8.52
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7212006034388869212
 Rigidbody:
@@ -226,7 +226,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.036
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -234,8 +234,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 1.77
+  MinDistance: 0.5
+  MaxDistance: 1.01
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   attackDamage: 10
   walkClip: {fileID: 8300000, guid: f1ff3e33006a291449618f6fc613e928, type: 3}
   hitClip: {fileID: 8300000, guid: 12e7285fa38aaf943a0ed8c7f3c684eb, type: 3}
-  walkClipCooldown: 2.74
+  walkClipCooldown: 22.9
   speed: 0.36
   acceleration: 2
   esEspecial: 0
