@@ -128,4 +128,9 @@ public class UIManager : MonoBehaviour
         GameManager.gameManager.Reiniciarnivel(); // cargar partida
     }
 
+    public void Guardar()
+    {
+        GameManager.gameManager.SaveData();
+    }
+
 }

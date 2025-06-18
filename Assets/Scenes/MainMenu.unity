@@ -1112,16 +1112,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607352391}
+      objectReference: {fileID: 1378458390}
     - target: {fileID: 6184537333162935546, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Reiniciarnivel
+      value: ReintentarPartida
       objectReference: {fileID: 0}
     - target: {fileID: 6184537333162935546, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6446181527062593303, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
@@ -1251,22 +1251,22 @@ PrefabInstance:
     - target: {fileID: 7598997135427377728, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7598997135427377728, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607352391}
+      objectReference: {fileID: 1378458390}
     - target: {fileID: 7598997135427377728, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveData
+      value: Guardar
       objectReference: {fileID: 0}
     - target: {fileID: 7598997135427377728, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7598997135427377728, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
@@ -1302,16 +1302,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607352391}
+      objectReference: {fileID: 1378458390}
     - target: {fileID: 8136024016562032366, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadData
+      value: ReintentarPartida
       objectReference: {fileID: 0}
     - target: {fileID: 8136024016562032366, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8334240424446234031, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
@@ -3471,18 +3471,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1607352391 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 234090060653940126, guid: d6eb5dfdbcdf32e44b40fa9e60ece13e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1350692540}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd6dc70a0631134458500887188907d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1702897774
 GameObject:
   m_ObjectHideFlags: 0
