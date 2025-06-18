@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{23DF22B6-65E4-F556-2F9F-51B5BB60C187}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OccaSoftware.Crosshairs.Editor", "OccaSoftware.Crosshairs.Editor.csproj", "{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.StarterAssets.Editor", "Unity.StarterAssets.Editor.csproj", "{A00C4347-E6A8-A76B-1F68-698F7B28D7B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URPWizard", "URPWizard.csproj", "{E1D599C2-D205-CD5D-4D88-9F224E464E8C}"
@@ -31,6 +33,10 @@ Global
 		{23DF22B6-65E4-F556-2F9F-51B5BB60C187}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23DF22B6-65E4-F556-2F9F-51B5BB60C187}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23DF22B6-65E4-F556-2F9F-51B5BB60C187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39BCB11B-2FE9-FD70-0DD3-B9B51B34CC40}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A00C4347-E6A8-A76B-1F68-698F7B28D7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A00C4347-E6A8-A76B-1F68-698F7B28D7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A00C4347-E6A8-A76B-1F68-698F7B28D7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
