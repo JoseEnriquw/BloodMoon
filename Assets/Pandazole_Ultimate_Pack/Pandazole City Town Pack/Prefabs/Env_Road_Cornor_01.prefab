@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5593467096685588114}
   - component: {fileID: 742020354061191790}
   - component: {fileID: 1060063816900407952}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Env_Road_Cornor_01
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

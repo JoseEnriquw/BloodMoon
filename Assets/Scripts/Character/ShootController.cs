@@ -19,6 +19,8 @@ public class ShootController : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private Animator animator;
     [SerializeField] PlayerData playerData;
+    [SerializeField] private AudioClip shootAudioClip;
+    private AudioSource audioSource;
     private bool IsEquiped=false;
 
     private void Awake()
@@ -26,6 +28,7 @@ public class ShootController : MonoBehaviour
         starterAssetsInputs= GetComponent<StarterAssetsInputs>();
         thirdPersonController= GetComponent<StarterAssets.ThirdPersonController>();
         animator= GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -62,6 +65,8 @@ public class ShootController : MonoBehaviour
             if (starterAssetsInputs.shoot)
             {
                 if (playerData.Bullets > 0) {
+                    if (shootAudioClip != null)
+                        audioSource.PlayOneShot(shootAudioClip);
                     Vector3 aimDir = (mouseWoldPosition - spawnBulletPosition.position).normalized;
                     Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
                     starterAssetsInputs.shoot = false;
