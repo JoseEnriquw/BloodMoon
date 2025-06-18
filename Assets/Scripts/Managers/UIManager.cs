@@ -130,6 +130,8 @@ public class UIManager : MonoBehaviour
             TogglePausa();
         }
         panelDerrota.SetActive(false); // ocultar el panel de derrota
+        
+
         Time.timeScale = 1f; // asegurar que el juego siga
 
         GameManager.gameManager.Reiniciarnivel(); // cargar partida

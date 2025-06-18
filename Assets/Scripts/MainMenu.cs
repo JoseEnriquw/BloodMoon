@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject victoryPanel;
     [SerializeField] GameObject defetPanel;
+    [SerializeField] GameObject hudPanel;
 
     public static MainMenu Instance;
 
@@ -64,6 +65,7 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         victoryPanel.SetActive(false);
         defetPanel.SetActive(false);    
+        hudPanel.SetActive(false);    
     }
     public void CerrarConfig()
     {

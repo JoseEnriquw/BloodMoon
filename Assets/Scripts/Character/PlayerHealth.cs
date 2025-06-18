@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;  
-    private bool isDead = false;
+    [SerializeField] private bool isDead = false;
    // Animator anim;
     private void Awake()
     {
@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         {
             isDead = true;
             GameManager.Instance.Perder();
+
             // anim.SetBool("isDeath", true);
             //pasar a pantalla de derrota
             return;
