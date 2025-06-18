@@ -84,7 +84,9 @@ public class UIManager : MonoBehaviour
     public void MostrarVictoria()
     {
         Time.timeScale = 0;
-        hud.SetActive(false);       
+        hud.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         panelVictoria.SetActive(true);
     }
     public void BactoMenu()

@@ -2334,8 +2334,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 5373386569166790126, guid: 656f27892fd8bf8448bbfaa597b35d10,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.168
+  m_PlayOnAwake: 0
+  m_Volume: 0.089
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2547,6 +2547,7 @@ MonoBehaviour:
   spawnBulletPosition: {fileID: 7190510910802477132}
   animator: {fileID: 0}
   playerData: {fileID: 11400000, guid: e67d6a4cb81a4ef4597a250fb2ad1387, type: 2}
+  shootAudioClip: {fileID: 8300000, guid: 296f3f4a5297b1d4ca58d0b4efe9f822, type: 3}
 --- !u!4 &9202435927924377808 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8333627713332763490, guid: a1c518e87902d174f9cd7de45b671b3d,
@@ -2630,6 +2631,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rifle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211490660161993361, guid: d5b7ca1bde301914587898f9df549cec,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211490660161993361, guid: d5b7ca1bde301914587898f9df549cec,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7211490660161993361, guid: d5b7ca1bde301914587898f9df549cec,
         type: 3}

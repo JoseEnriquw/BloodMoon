@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: 5623640221231161772, guid: ee0fc2e6da7f0204bbf2531a223f3b66, type: 3}
   - {fileID: 1406521359687652862, guid: 5b130997e63062e498145481b7065aeb, type: 3}
   - {fileID: 8065338943492044848, guid: 0d9c898bdc851b640a9af91c9a44ba65, type: 3}
-  gridSize: 10
+  gridSize: 15
   tileSize: 4
   gira: 0
   fencePrefab: {fileID: 943829013080367794, guid: 1b4530a13804d6942a11e970905a32ff,
@@ -258,10 +258,10 @@ MonoBehaviour:
   hordes:
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
-    numberToSpawn: 4
+    numberToSpawn: 10
   - zombiePrefab: {fileID: 7646794583474518930, guid: 71ac9f60cd8fef542ab64af8c7b78d4b,
       type: 3}
-    numberToSpawn: 4
+    numberToSpawn: 10
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
     numberToSpawn: 4

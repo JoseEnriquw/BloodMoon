@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
+
 using System.Collections.Generic;
 
 public class ComicSequence : MonoBehaviour
