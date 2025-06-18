@@ -216,10 +216,66 @@ public class GameManager : MonoBehaviour
     public void Perder()
     {
         if (juegoTerminado) return;
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         juegoTerminado = true;
+        Debug.Log("hola");
         Time.timeScale = 0;
         UIManager.Instance.MostrarDerrota();
+    }
+    public void Reiniciarnivel()
+    {
+        
+
+        string path = Application.persistentDataPath + "/GameInfo.dat";
+        if (File.Exists(path))
+        {
+            Debug.Log(Application.persistentDataPath);
+
+            FileInfo fileInfo = new FileInfo(path);
+            if (fileInfo.Length > 0)
+            {
+                try
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    using (FileStream fileStream = File.Open(path, FileMode.Open))
+                    {
+                        gameInfo = (GameInfo)bf.Deserialize(fileStream);
+                        playerData.Health = 100;
+                        playerData.Bullets = 0;
+                        playerData.Runes = gameInfo.Runes;
+
+                        if (gameInfo.LevelsWithRune == null)
+                            gameInfo.LevelsWithRune = new List<int>();
+                    }
+                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
+                    if (gameInfo.LastSceneIndex != currentIndex)
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    }
+                    else
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(1);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Error al cargar datos: " + e.Message);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("El archivo existe pero est� vac�o.");
+            }
+        }
+        else
+        {
+            Debug.Log("No se encontr� el archivo de guardado.");
+        }
+
+
     }
 
     

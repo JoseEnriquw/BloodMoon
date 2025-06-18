@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private GameObject hud;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI bulletsText;
     [SerializeField] private TextMeshProUGUI ruinsText;
     [SerializeField] private Image runa1;
@@ -46,6 +47,8 @@ public class UIManager : MonoBehaviour
             hud.SetActive(true);
 
         if (healthText != null) healthText.text = health.ToString();
+        if (healthSlider != null) healthSlider.value = health;
+
         if (bulletsText != null) bulletsText.text = bullets.ToString();
         if (ruinsText != null) ruinsText.text = ruins.ToString();
         if (ruins == 1) 
@@ -115,10 +118,19 @@ public class UIManager : MonoBehaviour
     }
     public void ReintentarPartida()
     {
+        if (juegoPausado)
+        {
+            TogglePausa();
+        }
         panelDerrota.SetActive(false); // ocultar el panel de derrota
         Time.timeScale = 1f; // asegurar que el juego siga
 
-        GameManager.gameManager.LoadData(); // cargar partida
+        GameManager.gameManager.Reiniciarnivel(); // cargar partida
+    }
+
+    public void Guardar()
+    {
+        GameManager.gameManager.SaveData();
     }
 
 }
