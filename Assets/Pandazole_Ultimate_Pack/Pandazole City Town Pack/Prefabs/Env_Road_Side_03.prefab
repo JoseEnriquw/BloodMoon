@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8035008593328486040}
   - component: {fileID: 6116693523984459322}
   - component: {fileID: 4167872198819374967}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Env_Road_Side_03
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

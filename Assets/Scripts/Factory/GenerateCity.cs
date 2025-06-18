@@ -1,4 +1,10 @@
 ﻿using UnityEngine;
+using Unity.AI.Navigation;
+using System.Collections;
+
+using UnityEngine.AI;
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -40,11 +46,47 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
     public GameObject boundaryStraightPrefab;
     public GameObject boundaryCornerPrefab;
 
+    [Header("Prefab de salida única")]
+    public GameObject salidaPrefab; 
+
     private Transform cityParent;
+
+    // --- NUEVO PARA MAPA INTERACTIVO Y NAVMESH ---
+    [Header("NavMesh y objetos interactuables")]
+    public NavMeshSurface navMeshSurface;
+
+    [Header("Prefabs interactuables")]
+    public GameObject vidasPrefab;
+    public GameObject balasPrefab;
+    public GameObject runaPrefab;
+    public GameObject objetoEspecialPrefab;
+
+    [Tooltip("Cuántas vidas spawnean")]
+    public int cantidadVidas = 5;
+    [Tooltip("Cuántas balas spawnean")]
+    public int cantidadBalas = 5;
+
+    [Tooltip("Layer donde está el suelo")]
+    public LayerMask groundLayer;
+
+    [Tooltip("Layer de zonas bloqueadas para pickups")]
+    public LayerMask blockedLayer;
+
+    [Tooltip("Ocultar la runa hasta activarla manualmente")]
+    public bool ocultarRunaHastaRevelar = false;
+
+    [Tooltip("Radio desde el centro para colocar pickups")]
+    public float mapRadius = 100f;
+
+    private GameObject instanciaRuna;
+
 
     void Start()
     {
         GenerateCity();
+        StartCoroutine(GenerateNavmeshAndPlaceItems());
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnSceneLoaded();
     }
 
     [ContextMenu("Generate City")]
@@ -163,56 +205,107 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
         // 10) Generar perímetro perfecto: corners + straights (sin solapamiento ni espacios)
         if (boundaryStraightPrefab != null && boundaryCornerPrefab != null)
         {
-            float boundaryLen = boundaryStraightPrefab.GetComponent<Renderer>().bounds.size.z; // Asegúrate que mesh y collider coinciden con renderer
+            float boundaryLen = boundaryStraightPrefab.GetComponent<Renderer>().bounds.size.z;
 
             float minX = origin.x - interSize;
             float maxX = origin.x + (xCount - 1) * step + interSize;
             float minZ = origin.z - interSize;
             float maxZ = origin.z + (zCount - 1) * step + interSize;
 
-            // Posiciones de corners
-            Vector3 southWest = new Vector3(minX, 0, minZ); // (xMin, zMin)
-            Vector3 southEast = new Vector3(maxX, 0, minZ); // (xMax, zMin)
-            Vector3 northEast = new Vector3(maxX, 0, maxZ); // (xMax, zMax)
-            Vector3 northWest = new Vector3(minX, 0, maxZ); // (xMin, zMax)
+            // Esquinas
+            Vector3 southWest = new Vector3(minX, 0, minZ);
+            Vector3 southEast = new Vector3(maxX, 0, minZ);
+            Vector3 northEast = new Vector3(maxX, 0, maxZ);
+            Vector3 northWest = new Vector3(minX, 0, maxZ);
 
-            // Spawnear corners
-            Spawn(boundaryCornerPrefab, southWest, Quaternion.identity, boundariesParent);           // SW
-            Spawn(boundaryCornerPrefab, southEast, Quaternion.Euler(0, 90, 0), boundariesParent);    // SE
-            Spawn(boundaryCornerPrefab, northEast, Quaternion.Euler(0, 180, 0), boundariesParent);   // NE
-            Spawn(boundaryCornerPrefab, northWest, Quaternion.Euler(0, 270, 0), boundariesParent);   // NW
+            Spawn(boundaryCornerPrefab, southWest, Quaternion.identity, boundariesParent);
+            Spawn(boundaryCornerPrefab, southEast, Quaternion.Euler(0, 90, 0), boundariesParent);
+            Spawn(boundaryCornerPrefab, northEast, Quaternion.Euler(0, 180, 0), boundariesParent);
+            Spawn(boundaryCornerPrefab, northWest, Quaternion.Euler(0, 270, 0), boundariesParent);
 
-            // Calcular cuántos straights por lado (solo entre corners)
             int countX = Mathf.RoundToInt((maxX - minX) / boundaryLen);
             int countZ = Mathf.RoundToInt((maxZ - minZ) / boundaryLen);
 
-            // Sur (de SW a SE, sin corners)
+            // ----- 1. Prepara lista de posibles posiciones para salida (solo straights, no corners) -----
+            var salidaOptions = new List<(Vector3 pos, Quaternion rot)>();
+
+            // Sur (z = minZ)
             for (int i = 1; i < countX; i++)
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, minZ);
-                Spawn(boundaryStraightPrefab, pos, Quaternion.identity, boundariesParent);
+                salidaOptions.Add((pos, Quaternion.identity));
             }
-            // Norte (de NW a NE, sin corners)
+            // Norte (z = maxZ)
             for (int i = 1; i < countX; i++)
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, maxZ);
-                Spawn(boundaryStraightPrefab, pos, Quaternion.Euler(0, 180, 0), boundariesParent);
+                salidaOptions.Add((pos, Quaternion.Euler(0, 180, 0)));
             }
-            // Oeste (de SW a NW, sin corners)
+            // Oeste (x = minX)
             for (int i = 1; i < countZ; i++)
             {
                 float z = minZ + i * boundaryLen;
                 Vector3 pos = new Vector3(minX, 0, z);
-                Spawn(boundaryStraightPrefab, pos, Quaternion.Euler(0, 270, 0), boundariesParent);
+                salidaOptions.Add((pos, Quaternion.Euler(0, 270, 0)));
             }
-            // Este (de SE a NE, sin corners)
+            // Este (x = maxX)
             for (int i = 1; i < countZ; i++)
             {
                 float z = minZ + i * boundaryLen;
                 Vector3 pos = new Vector3(maxX, 0, z);
-                Spawn(boundaryStraightPrefab, pos, Quaternion.Euler(0, 90, 0), boundariesParent);
+                salidaOptions.Add((pos, Quaternion.Euler(0, 90, 0)));
+            }
+
+            // ----- 2. Elige al azar una posición para la salida -----
+            (Vector3 salidaPos, Quaternion salidaRot) = salidaOptions[Random.Range(0, salidaOptions.Count)];
+
+            // ----- 3. Instancia boundaries, colocando salida en la posición elegida -----
+
+            // Sur
+            for (int i = 1; i < countX; i++)
+            {
+                float x = minX + i * boundaryLen;
+                Vector3 pos = new Vector3(x, 0, minZ);
+                Quaternion rot = Quaternion.identity;
+                if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
+                    Spawn(salidaPrefab, pos, rot, boundariesParent);
+                else
+                    Spawn(boundaryStraightPrefab, pos, rot, boundariesParent);
+            }
+            // Norte
+            for (int i = 1; i < countX; i++)
+            {
+                float x = minX + i * boundaryLen;
+                Vector3 pos = new Vector3(x, 0, maxZ);
+                Quaternion rot = Quaternion.Euler(0, 180, 0);
+                if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
+                    Spawn(salidaPrefab, pos, rot, boundariesParent);
+                else
+                    Spawn(boundaryStraightPrefab, pos, rot, boundariesParent);
+            }
+            // Oeste
+            for (int i = 1; i < countZ; i++)
+            {
+                float z = minZ + i * boundaryLen;
+                Vector3 pos = new Vector3(minX, 0, z);
+                Quaternion rot = Quaternion.Euler(0, 270, 0);
+                if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
+                    Spawn(salidaPrefab, pos, rot, boundariesParent);
+                else
+                    Spawn(boundaryStraightPrefab, pos, rot, boundariesParent);
+            }
+            // Este
+            for (int i = 1; i < countZ; i++)
+            {
+                float z = minZ + i * boundaryLen;
+                Vector3 pos = new Vector3(maxX, 0, z);
+                Quaternion rot = Quaternion.Euler(0, 90, 0);
+                if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
+                    Spawn(salidaPrefab, pos, rot, boundariesParent);
+                else
+                    Spawn(boundaryStraightPrefab, pos, rot, boundariesParent);
             }
         }
 
@@ -244,5 +337,115 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
         GameObject inst = Instantiate(prefab, pos, rot, parent);
 #endif
         inst.transform.SetLocalPositionAndRotation(pos, rot);
+    }
+
+    private IEnumerator GenerateNavmeshAndPlaceItems()
+    {
+        // Construir el NavMesh
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.BuildNavMesh();
+            // Esperar hasta que el NavMesh esté listo
+            yield return new WaitUntil(() => navMeshSurface.navMeshData != null);
+            yield return null; // un frame extra para asegurar
+        }
+
+        // Activar todos los spawners
+        ActivateAllSpawners();
+
+        // Spawnear pickups (vidas, balas)
+        SpawnItems(vidasPrefab, cantidadVidas);
+        yield return null;
+
+        SpawnItems(balasPrefab, cantidadBalas);
+        yield return null;
+
+        // Spawnear runa única
+        SpawnRunaSegura();
+
+        // Spawnear objeto especial, si hay
+        if (objetoEspecialPrefab != null)
+        {
+            SpawnObjetoEspecialUnico();
+            yield return null;
+        }
+    }
+
+    // ---- Métodos auxiliares spawn de objetos interactivos y enemigos ----
+    void SpawnItems(GameObject prefab, int cantidad)
+    {
+        if (prefab == null) return;
+        for (int i = 0; i < cantidad; i++)
+        {
+            Vector3 spawnPos = GetRandomNavMeshPosition();
+            if (spawnPos != Vector3.zero)
+                Instantiate(prefab, spawnPos, Quaternion.identity, cityParent); // O usar el parent que prefieras
+        }
+    }
+
+    void SpawnRunaSegura()
+    {
+        Vector3 spawnPos = GetRandomNavMeshPosition();
+        if (spawnPos != Vector3.zero && runaPrefab != null)
+        {
+            instanciaRuna = Instantiate(runaPrefab, spawnPos, Quaternion.identity, cityParent);
+            if (ocultarRunaHastaRevelar)
+            {
+                instanciaRuna.SetActive(false);
+            }
+        }
+    }
+
+    public void RevelarRuna()
+    {
+        if (instanciaRuna != null)
+            instanciaRuna.SetActive(true);
+    }
+
+    void SpawnObjetoEspecialUnico()
+    {
+        Vector3 spawnPos = GetRandomNavMeshPosition();
+        if (spawnPos != Vector3.zero)
+            Instantiate(objetoEspecialPrefab, spawnPos, Quaternion.identity, cityParent);
+    }
+
+    void ActivateAllSpawners()
+    {
+        // Buscar todos los ZombieSpawners en la escena
+        ZombieSpawner[] spawners = FindObjectsOfType<ZombieSpawner>();
+
+        foreach (ZombieSpawner spawner in spawners)
+        {
+            spawner.ZSpawner();
+        }
+
+        Debug.Log($"Activados {spawners.Length} spawners de zombies");
+    }
+
+    // --- Helper para obtener posiciones válidas ---
+    Vector3 GetRandomNavMeshPosition()
+    {
+        const float verticalOffset = 0.3f;
+        int maxTries = 30;
+        for (int tries = 0; tries < maxTries; tries++)
+        {
+            float safeMargin = 2f;
+            float step = mapRadius / 2f;
+            float randomX = Random.Range(-step + safeMargin, step - safeMargin);
+            float randomZ = Random.Range(-step + safeMargin, step - safeMargin);
+
+            Vector3 probe = cityParent.position + new Vector3(randomX, 50f, randomZ);
+
+            if (Physics.Raycast(probe, Vector3.down, out RaycastHit hit, 100f, groundLayer))
+            {
+                if (NavMesh.SamplePosition(hit.point, out NavMeshHit nav, 1.5f, NavMesh.AllAreas))
+                {
+                    Vector3 finalPos = nav.position + Vector3.up * verticalOffset;
+                    if (Physics.CheckSphere(finalPos, 0.5f, blockedLayer)) continue;
+                    return finalPos;
+                }
+            }
+        }
+        return Vector3.zero;
     }
 }
