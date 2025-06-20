@@ -43,6 +43,11 @@ public class EnemyHealth : MonoBehaviour
         SetHealth(currentHealth - damage);        
         if (currentHealth <= 0 && !isDead)
         {
+            if (TryGetComponent<NavMeshAgent>(out var nav))
+            {
+                nav.isStopped = true;
+                nav.enabled = false;
+            }
             isDead = true;
             animator.ResetTrigger("IsAttacking");
             animator.SetBool("IsDead ", true);
@@ -52,11 +57,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 controller.OnMuere();
             }
-            if (TryGetComponent<NavMeshAgent>(out var nav))
-            {
-                nav.isStopped = true;
-                nav.enabled = false;
-            }
+            
             StartCoroutine(DestroyAfterDeath());          
             return;
         }
