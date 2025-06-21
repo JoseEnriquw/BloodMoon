@@ -90,11 +90,7 @@ public class EnemiesController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    //void Start()
-    //{
-    //    agent.speed = speed;
-    //    agent.acceleration = acceleration;
-    //}
+    
     void Start()
     {
         agent.speed = speed;
@@ -105,7 +101,7 @@ public class EnemiesController : MonoBehaviour
         if (patrolPoints != null && patrolPoints.Length > 0 && agent.isOnNavMesh)
         {
             agent.SetDestination(patrolPoints[0].position);
-            //Debug.Log($"[{name}] SetDestination hacia: {patrolPoints[0].position}");
+           
         }
         else
         {
@@ -180,6 +176,7 @@ public class EnemiesController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if (health.isDead) return;
         if (!other.CompareTag("Player")) return;
 
         CancelAttack();
@@ -201,6 +198,7 @@ public class EnemiesController : MonoBehaviour
 
     void CancelAttack()
     {
+        if (health.isDead) return;
         animator.ResetTrigger("IsAttacking");
         animator.CrossFade("Locomotion", 0.05f);
         alreadyAttacked = false;

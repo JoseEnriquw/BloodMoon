@@ -132,16 +132,19 @@ public class GameManager : MonoBehaviour
                             gameInfo.LevelsWithRune = new List<int>();
                     }
                     int currentIndex = SceneManager.GetActiveScene().buildIndex;
-                    if (gameInfo.LastSceneIndex != currentIndex)
-                    {
-                        OnSceneLoaded();
-                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
-                    }
-                    else
-                    {
-                        OnSceneLoaded();
-                        GameSceneManager.Instance.LoadSceneByIndex(1);
-                    }
+                    //if (gameInfo.LastSceneIndex != currentIndex)
+                    //{
+                    //    OnSceneLoaded();
+                    //    GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    //}
+                    //else
+                    //{
+                    //    OnSceneLoaded();
+                    //    GameSceneManager.Instance.LoadSceneByIndex(1);
+                    //}
+                    OnSceneLoaded();
+                    GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                
                 }
                 catch (System.Exception e)
                 {
@@ -215,10 +218,10 @@ public class GameManager : MonoBehaviour
 
     public void Perder()
     {
-        if (juegoTerminado) return;
+        //if (juegoTerminado) return;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        juegoTerminado = true;
+        //juegoTerminado = true;
         Debug.Log("hola");
         Time.timeScale = 0;
         UIManager.Instance.MostrarDerrota();
@@ -248,17 +251,9 @@ public class GameManager : MonoBehaviour
                         if (gameInfo.LevelsWithRune == null)
                             gameInfo.LevelsWithRune = new List<int>();
                     }
-                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
-                    if (gameInfo.LastSceneIndex != currentIndex)
-                    {
-                        OnSceneLoaded();
-                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
-                    }
-                    else
-                    {
-                        OnSceneLoaded();
-                        GameSceneManager.Instance.LoadSceneByIndex(1);
-                    }
+
+                    OnSceneLoaded();
+                    GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
                 }
                 catch (System.Exception e)
                 {
@@ -267,12 +262,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("El archivo existe pero est� vac�o.");
+                Debug.LogWarning("El archivo existe pero está vacío.");
             }
         }
         else
         {
-            Debug.Log("No se encontr� el archivo de guardado.");
+            Debug.Log("No se encontró el archivo de guardado.");
         }
 
 

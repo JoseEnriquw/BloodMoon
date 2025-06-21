@@ -10,7 +10,7 @@ using UnityEditor;
 #endif
 using System.Collections.Generic;
 
-[ExecuteAlways]
+
 public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
 {
     public enum RoadPieceType { Straight, Corner, TJunction, Cross, End }

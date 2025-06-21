@@ -57,10 +57,13 @@ public class UIManager : MonoBehaviour
         }
         if (ruins == 2)
         {
+            runa1.gameObject.SetActive(true);
             runa2.gameObject.SetActive(true);
         }
         if (ruins == 3)
         {
+            runa1.gameObject.SetActive(true);
+            runa2.gameObject.SetActive(true);
             runa3.gameObject.SetActive(true);
         }
     }
@@ -127,6 +130,8 @@ public class UIManager : MonoBehaviour
             TogglePausa();
         }
         panelDerrota.SetActive(false); // ocultar el panel de derrota
+        
+
         Time.timeScale = 1f; // asegurar que el juego siga
 
         GameManager.gameManager.Reiniciarnivel(); // cargar partida
