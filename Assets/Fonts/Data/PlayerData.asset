@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   MaxHealth: 100
-  Bullets: 35
+  Bullets: 10
   Runes: 0
   LastPosition: {x: 0, y: 0, z: 0}

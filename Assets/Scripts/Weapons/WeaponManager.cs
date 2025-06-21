@@ -67,15 +67,15 @@ public class WeaponManager : MonoBehaviour
         IsAiming = !IsAiming;
     }
 
-    public void Shoot() 
-    {
-        if (currentWeapon == null) return;
-        // Here you can add the logic to handle shooting, like instantiating bullets or playing sound effects.
-        Debug.Log("Shooting with weapon: " + currentWeapon.name);
+    //public void Shoot() 
+    //{
+    //    if (currentWeapon == null) return;
+    //    // Here you can add the logic to handle shooting, like instantiating bullets or playing sound effects.
+    //    Debug.Log("Shooting with weapon: " + currentWeapon.name);
 
-        currentWeapon.Shoot();
-        playerAnimator.SetBool("Shoot", false);
-    }
+    //    currentWeapon.Shoot();
+    //    playerAnimator.SetBool("Shoot", false);
+    //}
 
 
     #region Animation
