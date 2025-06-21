@@ -5,11 +5,9 @@ public class Weapon : MonoBehaviour
 {
     [Header("Disparo")]
     [SerializeField] private GameObject BulletPrefab;
-    [SerializeField] float BulletRange = 100f;
-    [SerializeField] float BulletSpeed = 20f;
     [SerializeField] string WeaponName = "Default Weapon";
-    [SerializeField] Transform WeaponMuzzle;
     [SerializeField] private AudioClip shootAudioClip;
+
     private AudioSource audioSource;
 
     void Start()
@@ -17,19 +15,13 @@ public class Weapon : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
-    }
-
-    public void Shoot()
+    public void Shoot(Vector3 aimDir, Vector3 spawnBulletPosition)
     {
         // opcional: proyectil físico
         if (BulletPrefab)
         {
-            GameObject proj = Instantiate(BulletPrefab, WeaponMuzzle.transform.position,
-                                          Quaternion.LookRotation(WeaponMuzzle.transform.right));
-            if (proj.TryGetComponent<Rigidbody>(out var rb))
-                rb.velocity = WeaponMuzzle.transform.forward * BulletSpeed;
+            Instantiate(BulletPrefab, spawnBulletPosition,
+                                          Quaternion.LookRotation(aimDir,Vector3.up));
 
             if(shootAudioClip != null)
                 audioSource.PlayOneShot(shootAudioClip);
