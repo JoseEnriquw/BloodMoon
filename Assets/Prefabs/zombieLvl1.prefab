@@ -150,6 +150,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7517932753544554422}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6fd49189e8ccb3b4e94297f38722aee9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4159591641400637680}
   m_SourcePrefab: {fileID: 100100000, guid: 6fd49189e8ccb3b4e94297f38722aee9, type: 3}
 --- !u!1 &466577530232315826 stripped
 GameObject:
@@ -372,7 +376,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466577530232315826}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2644f8407dd60704ca96835c14eca8a7, type: 3}
   m_Name: 
@@ -388,3 +392,31 @@ MonoBehaviour:
   speed: 0.21
   acceleration: 4
   esEspecial: 0
+--- !u!114 &4159591641400637680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466577530232315826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e83968461411cb47a75990bed3b2c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1642706088414740868}
+  projectile: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  patrolPointRange: 10
+  walkPointRange: 0.03
+  triggerRadius: 8
+  attackRayDistance: 4
+  timeBetweenAttacks: 1
+  patrolPoints: []
+  walksound: {fileID: 0}
+  hitSound: {fileID: 0}
