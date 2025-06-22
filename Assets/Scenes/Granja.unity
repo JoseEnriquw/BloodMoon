@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.012254483, g: 0.030008983, b: 0.04371774, a: 1}
+  m_IndirectSpecularColor: {r: 0.012245246, g: 0.030009747, b: 0.043723065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,70 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &327821692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327821693}
+  - component: {fileID: 327821694}
+  m_Layer: 0
+  m_Name: AnimalGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327821693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327821692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 56, y: 0, z: 58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &327821694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327821692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233bb0c14a5455a49901af1590a235ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animales:
+  - prefab: {fileID: 8641819425464414812, guid: 7dfaa6e9b713f1947912b4c8be1c13b9,
+      type: 3}
+    cantidad: 2
+  - prefab: {fileID: 6714359857915854758, guid: 929fae2ed668217449ab7ab152b6b81a,
+      type: 3}
+    cantidad: 3
+  - prefab: {fileID: 8641819425464414812, guid: 8c28d3a9f5013c84ea4d1ad54763ed46,
+      type: 3}
+    cantidad: 2
+  - prefab: {fileID: 8641819425464414812, guid: 1932dd1b1d98c094585bd90fd1b65a71,
+      type: 3}
+    cantidad: 1
+  - prefab: {fileID: 6808516057225523824, guid: 31c87962f47444f4584337f46df5e1e0,
+      type: 3}
+    cantidad: 5
+  - prefab: {fileID: 7280010799958242048, guid: b1f1feccfdd11ae429e18973c0a51433,
+      type: 3}
+    cantidad: 5
+  radioSpawn: 30
 --- !u!1 &820687357
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,3 +770,4 @@ SceneRoots:
   - {fileID: 1432094370}
   - {fileID: 1650919202}
   - {fileID: 1740830838}
+  - {fileID: 327821693}

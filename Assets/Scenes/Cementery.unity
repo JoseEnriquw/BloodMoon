@@ -258,10 +258,10 @@ MonoBehaviour:
   hordes:
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
-    numberToSpawn: 10
+    numberToSpawn: 20
   - zombiePrefab: {fileID: 7646794583474518930, guid: 71ac9f60cd8fef542ab64af8c7b78d4b,
       type: 3}
-    numberToSpawn: 10
+    numberToSpawn: 20
   - zombiePrefab: {fileID: 466577530232315826, guid: a1e9f38fdd672c24a9ea1bdf7b214894,
       type: 3}
     numberToSpawn: 4
@@ -280,7 +280,8 @@ AudioSource:
   m_GameObject: {fileID: 763417382}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5762100044390455241, guid: 656f27892fd8bf8448bbfaa597b35d10,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5d12f0d64a906384bb707db97d05968f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.754
