@@ -81,6 +81,10 @@ public class FarmGenerator : MonoBehaviour
 
         // Esperar hasta que el NavMesh esté listo
         yield return new WaitUntil(() => navMeshSurface.navMeshData != null);
+        yield return null; // asegura que el sistema esté listo
+
+        
+        NavMeshEvents.OnNavMeshReady?.Invoke();
 
         // Esperar un frame adicional para asegurar que todo está inicializado
         yield return null;
