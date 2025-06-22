@@ -225,10 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 5341742223406746680, guid: 9c3cddd6060b7cc4eadfb9cefcf6e7db,
     type: 3}
-  BulletRange: 50
-  BulletSpeed: 1
   WeaponName: Default Weapon
-  WeaponMuzzle: {fileID: 688751523170452838}
   shootAudioClip: {fileID: 8300000, guid: 296f3f4a5297b1d4ca58d0b4efe9f822, type: 3}
 --- !u!54 &8267993538751865991
 Rigidbody:
