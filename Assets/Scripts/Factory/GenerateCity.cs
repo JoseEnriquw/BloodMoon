@@ -10,7 +10,6 @@ using UnityEditor;
 #endif
 using System.Collections.Generic;
 
-
 public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
 {
     public enum RoadPieceType { Straight, Corner, TJunction, Cross, End }
@@ -192,7 +191,7 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
             {
                 Vector3 center = origin + new Vector3(
                     ix * step + halfStep,
-                    0,
+                    0.15f,
                     iz * step + halfStep
                 );
                 if (blockPrefabs.Count > 0)
@@ -268,7 +267,7 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, minZ);
-                Quaternion rot = Quaternion.identity;
+                Quaternion rot = Quaternion.Euler(0, 180, 0);
                 if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
                     Spawn(salidaPrefab, pos, rot, boundariesParent);
                 else
@@ -279,7 +278,7 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, maxZ);
-                Quaternion rot = Quaternion.Euler(0, 180, 0);
+                Quaternion rot = Quaternion.Euler(0, 0, 0);
                 if (pos == salidaPos && rot == salidaRot && salidaPrefab != null)
                     Spawn(salidaPrefab, pos, rot, boundariesParent);
                 else
