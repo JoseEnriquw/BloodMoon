@@ -777,7 +777,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 991741129}
+      objectReference: {fileID: 1984978491}
+    - target: {fileID: 1090964851883937555, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReintentarPartida
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090964851883937555, guid: 412f072b2dcf06f49b0b605174973de8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1111442963767357911, guid: 412f072b2dcf06f49b0b605174973de8,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1965,6 +1975,7 @@ MonoBehaviour:
   optionsPanel: {fileID: 2016975925}
   victoryPanel: {fileID: 1601072137}
   defetPanel: {fileID: 1100145820}
+  hudPanel: {fileID: 2054595556}
 --- !u!4 &991741130
 Transform:
   m_ObjectHideFlags: 0
@@ -3905,6 +3916,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952301586}
   m_CullTransparentMesh: 1
+--- !u!114 &1984978491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3294401225388940440, guid: 412f072b2dcf06f49b0b605174973de8,
+    type: 3}
+  m_PrefabInstance: {fileID: 293899250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0517988168bd76c49960584734713bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2016975925 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3484002105012575820, guid: 412f072b2dcf06f49b0b605174973de8,
@@ -4014,6 +4037,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &2054595556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697290970733950450, guid: 412f072b2dcf06f49b0b605174973de8,
+    type: 3}
+  m_PrefabInstance: {fileID: 293899250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2075036670
 GameObject:
   m_ObjectHideFlags: 0
