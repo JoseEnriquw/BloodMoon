@@ -132,18 +132,18 @@ public class GameManager : MonoBehaviour
                             gameInfo.LevelsWithRune = new List<int>();
                     }
                     int currentIndex = SceneManager.GetActiveScene().buildIndex;
-                    //if (gameInfo.LastSceneIndex != currentIndex)
-                    //{
-                    //    OnSceneLoaded();
-                    //    GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
-                    //}
-                    //else
-                    //{
-                    //    OnSceneLoaded();
-                    //    GameSceneManager.Instance.LoadSceneByIndex(1);
-                    //}
-                    OnSceneLoaded();
-                    GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    if (gameInfo.LastSceneIndex != currentIndex)
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
+                    }
+                    else
+                    {
+                        OnSceneLoaded();
+                        GameSceneManager.Instance.LoadSceneByIndex(1);
+                    }
+                    //OnSceneLoaded();
+                    //GameSceneManager.Instance.LoadSceneByIndex(gameInfo.LastSceneIndex);
                 
                 }
                 catch (System.Exception e)

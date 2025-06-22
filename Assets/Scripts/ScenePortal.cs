@@ -6,20 +6,19 @@ public class ScenePortal : MonoBehaviour
     [SerializeField] int cantRuna;
     [SerializeField] PlayerData playerData;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             if (cantRuna == playerData.Runes)
             {
-                GameSceneManager.Instance.LoadNextScene(); 
+                GameSceneManager.Instance.LoadNextScene();
             }
             else
             {
-
                 UIManager.Instance.FaltaRuna();
             }
         }
-        
     }
+
 }
