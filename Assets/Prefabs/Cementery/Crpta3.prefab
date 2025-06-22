@@ -2755,6 +2755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chapel_Base_1A
       objectReference: {fileID: 0}
+    - target: {fileID: 176702, guid: 028e0e4834b68d646818dd497d0fed64, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 462332, guid: 028e0e4834b68d646818dd497d0fed64, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.1357867
