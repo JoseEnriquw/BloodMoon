@@ -325,8 +325,8 @@ MonoBehaviour:
   agent: {fileID: 6164540514119666315}
   detectionRange: 10
   attackRange: 2
-  timeBetweenAttks: 1
-  attackDamage: 10
+  timeBetweenAttks: 0.8
+  attackDamage: 30
   walkClip: {fileID: 8300000, guid: f1ff3e33006a291449618f6fc613e928, type: 3}
   hitClip: {fileID: 8300000, guid: 12e7285fa38aaf943a0ed8c7f3c684eb, type: 3}
   walkClipCooldown: 22.9
