@@ -6,9 +6,9 @@ public class ScenePortal : MonoBehaviour
     [SerializeField] int cantRuna;
     [SerializeField] PlayerData playerData;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
             if (cantRuna == playerData.Runes)
             {
@@ -16,8 +16,10 @@ public class ScenePortal : MonoBehaviour
             }
             else
             {
+
                 UIManager.Instance.FaltaRuna();
             }
         }
+        
     }
 }

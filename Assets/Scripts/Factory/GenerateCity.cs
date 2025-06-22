@@ -233,14 +233,14 @@ public class ModularCityGeneratorWithPerimeterBoundaries : MonoBehaviour
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, minZ);
-                salidaOptions.Add((pos, Quaternion.identity));
+                salidaOptions.Add((pos, Quaternion.Euler(0, 180, 0)));
             }
             // Norte (z = maxZ)
             for (int i = 1; i < countX; i++)
             {
                 float x = minX + i * boundaryLen;
                 Vector3 pos = new Vector3(x, 0, maxZ);
-                salidaOptions.Add((pos, Quaternion.Euler(0, 180, 0)));
+                salidaOptions.Add((pos, Quaternion.Euler(0, 0, 0)));
             }
             // Oeste (x = minX)
             for (int i = 1; i < countZ; i++)
