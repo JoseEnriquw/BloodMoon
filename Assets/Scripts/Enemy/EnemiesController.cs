@@ -285,5 +285,11 @@ public class EnemiesController : MonoBehaviour
     }
 
 
+    public void ConfigDamage(int newDamage)
+    {
+        attackDamage=newDamage;
+    }
+
+
 }
 

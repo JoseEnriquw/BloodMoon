@@ -54,6 +54,7 @@ MonoBehaviour:
   mapRadius: 100
   safeBorder: 2
   verticalOffset: 0.5
+  damage: 20
 --- !u!1 &7151277911863977421
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +114,7 @@ MonoBehaviour:
   mapRadius: 100
   safeBorder: 2
   verticalOffset: 0.5
+  damage: 80
 --- !u!1001 &5861981228914457163
 PrefabInstance:
   m_ObjectHideFlags: 0

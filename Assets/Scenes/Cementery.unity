@@ -268,6 +268,7 @@ MonoBehaviour:
   mapRadius: 100
   safeBorder: 2
   verticalOffset: 0.5
+  damage: 90
 --- !u!82 &763417387
 AudioSource:
   m_ObjectHideFlags: 0
